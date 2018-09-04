@@ -9,6 +9,7 @@ class OrdersTestCase(unittest.TestCase):
         self.app = create_app(config_name="testing")
         self.client = self.app.test_client()
         self.order = {
+            "id": 1,
             "food": "chips",
             "quantity": 2, 
             "price": 200,
