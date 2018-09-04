@@ -37,7 +37,7 @@ class OrdersTestCase(unittest.TestCase):
         })
         self.assertEqual(response.status_code, 201)
         result = self.client.get('api/v1/order/1')
-        self.assertIn('complted', str(result.data))
+        self.assertIn('completed', str(result.data))
         
 
 if __name__ == "__main__":
