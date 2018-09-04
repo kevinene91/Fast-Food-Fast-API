@@ -21,8 +21,10 @@ class OrdersTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_resource_order_add(self):
-        response = self.client.post('api/v1/order', data=json.dumps(self.order))
-        self.assertEqual(response.status_code, 201)
+        response = self.client.post('api/v1/orders', data=self.order)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('chips', str(response.data))
+        
 
     def test_resource_order_get_by_id(self): 
         response = self.client.get('api/v1/order/1')
@@ -31,6 +33,7 @@ class OrdersTestCase(unittest.TestCase):
     def test_resource_order_edit(self): 
         # get_order_to_edit = self.client.get('api/v1/order/1')
         response = self.client.put('api/v1/order/1', data ={
+            "id": 5,
             "food": "chips",
             "quantity": 2, 
             "price": 200,
