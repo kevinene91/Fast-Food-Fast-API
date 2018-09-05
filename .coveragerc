@@ -1,5 +1,7 @@
-omit = 
-    thevenv/    
+[run]
+source = /home/nesh/dev/Fast-Food-Fast-API/
 
-source = 
-    
+omit = 
+    /home/nesh/dev/Fast-Food-Fast-API/thevenv/*    
+
+
