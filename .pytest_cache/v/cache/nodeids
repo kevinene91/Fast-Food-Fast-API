@@ -1,0 +1,6 @@
+[
+  "test_orders.py::test_resource_orders_all",
+  "test_orders.py::test_resource_order_add",
+  "test_orders.py::test_resource_order_get_by_id",
+  "test_orders.py::test_resource_order_edit"
+]
