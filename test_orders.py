@@ -27,20 +27,19 @@ class OrdersTestCase(unittest.TestCase):
         
 
     def test_resource_order_get_by_id(self): 
-        response = self.client.get('api/v1/order/1')
+        response = self.client.get('api/v1/orders/1')
         self.assertEqual(response.status_code, 200)
 
     def test_resource_order_edit(self): 
-        # get_order_to_edit = self.client.get('api/v1/order/1')
-        response = self.client.put('api/v1/order/1', data ={
+        response = self.client.put('api/v1/orders/1', data ={
             "id": 5,
             "food": "chips",
             "quantity": 2, 
             "price": 200,
             "status": "completed"
         })
-        self.assertEqual(response.status_code, 201)
-        result = self.client.get('api/v1/order/1')
+        self.assertEqual(response.status_code, 200)
+        result = self.client.get('api/v1/orders/1')
         self.assertIn('completed', str(result.data))
         
 

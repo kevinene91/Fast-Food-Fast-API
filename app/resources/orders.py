@@ -42,8 +42,20 @@ class OrderListResource(Resource):
         
 
 class OrderResource(Resource): 
-    
-    def get(self,id):
-        return {'order': next(filter(lambda x:x['id'] == id, orders), None)}
+	def get(self,id):
+		return {'order': next(filter(lambda x:x['id'] == id, orders), None)}
+
+	def put(self,id):
+		parser = reqparse.RequestParser()
+		parser.add_argument("status",
+				type=str,
+				required=True,
+		)
+		data = parser.parse_args()
+		order_to_edit = next(filter(lambda x:x['id'] == id, orders), None)
+		if order_to_edit:
+			order_to_edit.update(data)
+		return order_to_edit
+
 
     

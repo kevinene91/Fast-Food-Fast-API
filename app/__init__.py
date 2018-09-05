@@ -11,5 +11,5 @@ def create_app(config_name):
     api = Api(app, prefix='/api/v1')
 
     api.add_resource(OrderListResource, '/orders')
-    api.add_resource(OrderResource, '/order/<int:id>')
+    api.add_resource(OrderResource, '/orders/<int:id>')
     return app
