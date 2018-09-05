@@ -35,7 +35,7 @@ class OrderListResource(Resource):
             'status':data['status'] 
                 }
         orders.append(order)
-        return order
+        return order, 201
 
 
 class OrderResource(Resource): 
@@ -52,7 +52,7 @@ class OrderResource(Resource):
 		order_to_edit = next(filter(lambda x:x['id'] == id, orders), None)
 		if order_to_edit:
 			order_to_edit.update(data)
-		return order_to_edit
+		return order_to_edit, 201
 
 
     
