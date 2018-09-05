@@ -12,18 +12,22 @@ order = {
     "status": "pending"
 }
 
+#test get list orders 
 def test_resource_orders_all(): 
     response = client.get('api/v1/orders')
     assert(response.status_code == 200)
 
+#test post order 
 def test_resource_order_add():
     response = client.post('api/v1/orders', data=order)
     assert(response.status_code == 201)
-    
+
+#test get specific order
 def test_resource_order_get_by_id(): 
     response = client.get('api/v1/orders/1')
     assert(response.status_code == 200)
 
+#test editing for order
 def test_resource_order_edit(): 
     response = client.put('api/v1/orders/1', data ={
         "id": 5,
@@ -33,6 +37,14 @@ def test_resource_order_edit():
         "status": "completed"
     })
     assert(response.status_code == 201)
+ 
+# def test_resource_order_404(): 
+#     response = client.get('api/v1/orders/2')
+#     assert(response.status_code == 404)
+
+# def test_resource_order(): 
+#     response = client.get('api/v1/orders/-2')
+#     assert(response.status_code == )
 
 
         
