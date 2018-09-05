@@ -3,8 +3,6 @@ from flask_restful import Resource, reqparse
 from app.models import orders
 
 class OrderListResource(Resource):
-    
-    
     def get(self): 
         return {'orders':orders}
 
@@ -39,7 +37,6 @@ class OrderListResource(Resource):
         orders.append(order)
         return order
 
-        
 
 class OrderResource(Resource): 
 	def get(self,id):
