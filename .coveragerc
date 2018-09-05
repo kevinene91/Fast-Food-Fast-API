@@ -1,7 +1,6 @@
-[run]
-source = /home/nesh/dev/Fast-Food-Fast-API/
-
+[report]
 omit = 
-    /home/nesh/dev/Fast-Food-Fast-API/thevenv/*    
+    */python?.?/*
+    *site-packages/*  
 
 
