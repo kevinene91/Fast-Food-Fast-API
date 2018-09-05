@@ -18,7 +18,7 @@ def test_resource_orders_all():
 
 def test_resource_order_add():
     response = client.post('api/v1/orders', data=order)
-    assert(response.status_code == 200)
+    assert(response.status_code == 201)
     
 def test_resource_order_get_by_id(): 
     response = client.get('api/v1/orders/1')
@@ -32,8 +32,8 @@ def test_resource_order_edit():
         "price": 200,
         "status": "completed"
     })
-    assert(response.status_code == 200)
-    
+    assert(response.status_code == 201)
+
 
         
 
