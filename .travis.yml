@@ -9,7 +9,7 @@ install:
   - pip install nose
 
 script: 
-  - nosetests  --with-coverage --cover-package=app.resources
+  - nosetests  --with-coverage --cover-package=FAST-FOOD-FAST-API
 
 after_success:
   - "coveralls"
