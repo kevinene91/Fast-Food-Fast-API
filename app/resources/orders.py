@@ -8,24 +8,19 @@ class OrderListResource(Resource):
 
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument("id",
-                type=int, 
+        parser.add_argument("id",type=int, 
                 required=True,
         )
-        parser.add_argument("food",
-                type=str,
+        parser.add_argument("food",type=str,
                 required=True,
         )
-        parser.add_argument("quantity",
-                type=int,
+        parser.add_argument("quantity",type=int,
                 required=True,
         )
-        parser.add_argument("price",
-                type=int,
+        parser.add_argument("price",type=int,
                 required=True,
         )
-        parser.add_argument("status",
-                type=str,
+        parser.add_argument("status",type=str,
                 required=True,
         )
         data = parser.parse_args()
