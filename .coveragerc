@@ -2,6 +2,6 @@
 omit = 
 
     *site-packages/*  
-    
+    run.py    
 
 
