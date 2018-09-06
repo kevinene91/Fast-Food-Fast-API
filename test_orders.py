@@ -4,6 +4,7 @@ from app import create_app
 
 app = create_app(config_name="testing")
 client = app.test_client()
+
 order = {
     "id": 1,
     "food": "chips",
@@ -12,23 +13,111 @@ order = {
     "status": "pending"
 }
 
-#test get list orders 
+empty_order = {}
+
+status_less_order = {
+    "id": 1,
+    "food": "chips",
+    "quantity": 2, 
+    "price": 200,
+}
+
+price_less_order = {
+    "id": 1,
+    "food": "chips",
+    "quantity": 2, 
+    "status": "pending"  
+}
+quantity_less_order = {
+    "id": 1,
+    "food": "chips", 
+    "price": 200,
+    "status": "pending"
+}
+
+food_less_order = {
+    "id": 1, 
+    "quantity": 3,
+    "price": 200,
+    "status": "pending"
+}
+
+
 def test_resource_orders_all(): 
+    """
+        Test to get all orders
+    """
     response = client.get('api/v1/orders')
     assert(response.status_code == 200)
 
-#test post order 
 def test_resource_order_add():
+    """
+        Test to add post with appropirate data
+    """
     response = client.post('api/v1/orders', data=order)
     assert(response.status_code == 201)
+    assert 'chips' in str(response.data)
 
-#test get specific order
+def test_resource_order_add_without_data(): 
+    """
+        Test post without data
+    """
+    response = client.post('api/v1/orders', data=empty_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_status():
+    """
+        Test post withot status
+    """
+    response = client.post('api/v1/orders', data=status_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_price():
+    """
+        Test post withot price
+    """
+    response = client.post('api/v1/orders', data=price_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_quantity():
+    """
+        Test post withot quantity
+    """
+    response = client.post('api/v1/orders', data=quantity_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_food():
+    """
+        Test post withot food
+    """
+    response = client.post('api/v1/orders', data=food_less_order)
+    assert response.status_code == 400
+
 def test_resource_order_get_by_id(): 
+    """
+        Test to get order by its Id
+    """
     response = client.get('api/v1/orders/1')
     assert(response.status_code == 200)
 
-#test editing for order
+def test_resource_order_get_by_id_str(): 
+    """
+        Test to get order but str for id
+    """
+    response = client.get('api/v1/orders/e')
+    assert(response.status_code == 404)
+
+def test_resource_order_get_by_nonexisting_id(): 
+    """
+        Test to get order with non-existent id
+    """
+    response = client.get('api/v1/orders/4')
+    assert 'null' in str(response.data)
+
 def test_resource_order_edit(): 
+    """
+        Test edit by geting right id
+    """
     response = client.put('api/v1/orders/1', data ={
         "id": 5,
         "food": "chips",
@@ -37,17 +126,21 @@ def test_resource_order_edit():
         "status": "completed"
     })
     assert(response.status_code == 201)
+    assert 'completed' in str(response.data)
+
+def test_resource_order_edit_nonexisting_id(): 
+    """
+        Test edit by geting right id
+    """
+    response = client.put('api/v1/orders/6', data ={
+        "id": 5,
+        "food": "chips",
+        "quantity": 2, 
+        "price": 200,
+        "status": "completed"
+    })
+    assert(response.status_code == 400)
  
-# def test_resource_order_404(): 
-#     response = client.get('api/v1/orders/2')
-#     assert(response.status_code == 404)
-
-# def test_resource_order(): 
-#     response = client.get('api/v1/orders/-2')
-#     assert(response.status_code == )
-
-
-        
 
 
 

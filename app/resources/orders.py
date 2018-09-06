@@ -47,6 +47,8 @@ class OrderResource(Resource):
 		order_to_edit = next(filter(lambda x:x['id'] == id, orders), None)
 		if order_to_edit:
 			order_to_edit.update(data)
+		else:
+			return {"message":"no item to update"}, 400
 		return order_to_edit, 201
 
 
