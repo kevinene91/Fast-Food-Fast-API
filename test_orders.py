@@ -37,7 +37,7 @@ def test_resource_order_get_by_nonexisting_id():
 
 def test_resource_order_get_by_negative_id(): 
     """
-        Test to get order with non-existent id
+        Test to get order with negative id
     """
     response = client.get('api/v1/orders/-4')
     assert response.status_code == 404
