@@ -15,7 +15,6 @@ order = {
 def test_resource_orders_all(): 
     response = client.get('api/v1/orders')
     assert(response.status_code == 200)
-
     
 def test_resource_order_get_by_id(): 
     response = client.get('api/v1/orders/1')
