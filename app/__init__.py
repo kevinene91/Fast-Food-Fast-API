@@ -4,7 +4,7 @@ from flask import Flask
 from instance.config import app_config 
 
 # import resources
-from app.resources.orders import (OrderListResource, OrderResource)
+from app.resources.orders import OrderListResource
 
 def create_app(config_name): 
     """
@@ -20,5 +20,4 @@ def create_app(config_name):
 
     #register the endpoints
     api.add_resource(OrderListResource, '/orders')
-    api.add_resource(OrderResource, '/orders/<int:id>')
     return app
