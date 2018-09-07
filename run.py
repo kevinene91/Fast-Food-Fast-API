@@ -1,5 +1,5 @@
 
-# import os 
+import os 
 from app import create_app
 """
     app run point
