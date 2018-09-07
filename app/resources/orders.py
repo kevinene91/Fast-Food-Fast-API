@@ -39,12 +39,14 @@ class OrderResource(Resource):
 		"""
 			get a specicfic order via its id
 		"""
+		#filter list elements that do no have the id 
 		return {'order': next(filter(lambda x:x['id'] == id, orders), None)}
 
 	def put(self,id):
 		"""
 			get an order by its id and update it
 		"""
+		# get input
 		parser = reqparse.RequestParser()
 		parser.add_argument("status",
 				type=str,
@@ -52,6 +54,8 @@ class OrderResource(Resource):
 		)
 		data = parser.parse_args()
 		order_to_edit = next(filter(lambda x:x['id'] == id, orders), None)
+
+		#update order if found
 		if order_to_edit:
 			order_to_edit.update(data)
 		else:

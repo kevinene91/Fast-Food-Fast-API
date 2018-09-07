@@ -1,4 +1,7 @@
-
+"""
+    Database
+    List with dictionairies emulates a database table
+"""
 
 
 orders =[
