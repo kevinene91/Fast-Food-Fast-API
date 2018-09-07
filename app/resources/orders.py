@@ -4,8 +4,16 @@ from app.models import orders
 
 class OrderListResource(Resource):
 	def get(self): 
+
+		"""
+		Return all the orders 
+		"""
 		return {'orders':orders}
+
 	def post(self):
+		"""
+		Post an order fields input, food, quantity, price, status
+		"""
 		inc_id = len(orders) + 1
 		parser = reqparse.RequestParser()
 		parser.add_argument("food",type=str,
@@ -28,9 +36,15 @@ class OrderListResource(Resource):
 
 class OrderResource(Resource): 
 	def get(self,id):
+		"""
+			get a specicfic order via its id
+		"""
 		return {'order': next(filter(lambda x:x['id'] == id, orders), None)}
 
 	def put(self,id):
+		"""
+			get an order by its id and update it
+		"""
 		parser = reqparse.RequestParser()
 		parser.add_argument("status",
 				type=str,
