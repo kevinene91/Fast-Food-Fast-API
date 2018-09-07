@@ -1,10 +1,10 @@
 
-import os 
+# import os 
 from app import create_app
 """
     app run point
 """
-config_name = os.getenv('APP_SETTINGS')
+config_name = 'production'
 app = create_app(config_name)
 
 if __name__ == '__main__':
