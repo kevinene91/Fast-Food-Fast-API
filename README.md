@@ -1,5 +1,4 @@
 
-
 [![Coverage Status](https://coveralls.io/repos/github/kevinene91/Fast-Food-Fast-API/badge.svg?branch=develop )](https://coveralls.io/github/kevinene91/Fast-Food-Fast-API?branch=develop)[![Build Status](https://travis-ci.org/kevinene91/Fast-Food-Fast-API.svg?branch=develop)](https://travis-ci.org/kevinene91/Fast-Food-Fast-API)
 
 ### Flask FAST FOOD FAST
@@ -47,3 +46,5 @@ API Endpoints
 |/api/v1/orders    |   POST     | add  a new order    |
 |--------------    |----------- | -----------------   |
 |/api/v1/order/<id>|   PUT      |edit the order-status|
+
+
