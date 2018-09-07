@@ -1,3 +1,9 @@
+"""
+    Database
+    List with dictionairies emulates a database table
+"""
+
+
 orders =[
     {
         "id": 1,        
@@ -13,4 +19,3 @@ orders =[
         "price": 1500,
         "status": "pending" 
     }
-]
