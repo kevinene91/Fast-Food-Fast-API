@@ -143,5 +143,66 @@ def test_resource_order_edit_nonexisting_id():
  
 
 
+def test_resource_order_get_by_negative_id(): 
+    """
+        Test to get order with negative id
+    """
+    response = client.get('api/v1/orders/-4')
+    assert response.status_code == 404
 
+def test_resource_order_add_without_data(): 
+    """
+        Test post without data
+    """
+    response = client.post('api/v1/orders', data=empty_order)
+    assert response.status_code == 400
 
+def test_resource_add_without_status():
+    """
+        Test post withot status
+    """
+    response = client.post('api/v1/orders', data=status_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_price():
+    """
+        Test post withot price
+    """
+    response = client.post('api/v1/orders', data=price_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_quantity():
+    """
+        Test post withot quantity
+    """
+    response = client.post('api/v1/orders', data=quantity_less_order)
+    assert response.status_code == 400
+
+def test_resource_add_without_food():
+    """
+        Test post withot food
+    """
+    response = client.post('api/v1/orders', data=food_less_order)
+    assert response.status_code == 400
+
+def test_resource_order_get_by_id(): 
+    """
+        Test to get order by its Id
+    """
+    response = client.get('api/v1/orders/1')
+    assert(response.status_code == 200)
+
+def test_resource_order_get_by_id_str(): 
+    """
+        Test to get order but str for id
+    """
+    response = client.get('api/v1/orders/e')
+    assert(response.status_code == 404)
+
+def test_resource_order_get_by_nonexisting_id(): 
+    """
+        Test to get order with non-existent id
+    """
+    response = client.get('api/v1/orders/4')
+    assert 'null' in str(response.data)
+        

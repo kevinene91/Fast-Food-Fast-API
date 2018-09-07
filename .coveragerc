@@ -1,7 +1,7 @@
 [report]
 omit = 
-
-    *site-packages/*  
-    run.py    
+   
+    *site-packages/* 
+    run.py
 
 
