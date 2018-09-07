@@ -41,11 +41,11 @@ Use Postman to the test the following endpoints
 API Endpoints 
 
 |   # Endpoint     |  # Methods | # Description       |
-| -------------    |----------- | ------------------  | 
+|                  |            |                     | 
 |/api/v1/orders    |   GET      |  list all orders    |
-| ------------     | ---------- | -----------------   |
+|                  |            |                     |
 |/api/v1/order/<id>|   GET      | get a specific order|
-| -------------    | ---------  | ------------------- |
+|                  |            |                     |
 |/api/v1/orders    |   POST     | add  a new order    |
-|--------------    |----------- | -----------------   |
-|/api/v1/order/<id>]   PUT      |edit the order-status|
+|                  |            |                     |
+|/api/v1/order/<id>|   PUT      |edit the order-status|
