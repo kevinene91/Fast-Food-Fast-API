@@ -6,4 +6,6 @@
 
 *pyc
 
-.pytest_cache/
+
+/.pytest_cache
+
