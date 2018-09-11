@@ -1,6 +1,6 @@
 
 from flask_restful import Resource, reqparse
-from app.models import orders
+from app.models import order_obj
 
 class OrderListResource(Resource):
 
@@ -9,29 +9,32 @@ class OrderListResource(Resource):
 		"""
 		Return all the orders 
 		"""
-		return {'orders':orders}
+		allorders = order_obj.get_orders()
+		return {"orders":allorders}
+		
 
 	def post(self):
 		"""
 		Post an order fields input, food, quantity, price, status
 		"""
-		inc_id = len(orders) + 1
+		inc_id = order_obj.get_length() + 1
 		parser = reqparse.RequestParser()
 		parser.add_argument("food",type=str,
 		required=True)
 		parser.add_argument("quantity",type=int,
 		required=True)
-		parser.add_argument("price",type=int,
-		required=True)
-		parser.add_argument("status",type=str,
-		required=True)
 		data = parser.parse_args()
+
+		food_item = order_obj.get_food_by_name(data['food'],order_obj.get_foods())
+		food_price = food_item['price']   
+		total = order_obj.calculate_total_price(food_price,data['quantity'])
+		
 		order = {
-		'id': inc_id, 'food':data['food'],
-		'quantity':data['quantity'],'price':data['price'],
-		'status':data['status'] 
+		'id': inc_id, "customer_name":"nesh",'food':data['food'],
+		'quantity':data['quantity'],'total':total,
+		'status':"pending" 
 		}
-		orders.append(order)
+		order_obj.add_order(order)
 		return order, 201
 
 
@@ -41,7 +44,7 @@ class OrderResource(Resource):
 			get a specicfic order via its id
 		"""
 		#filter list elements that do no have the id 
-		return {'order': next(filter(lambda x:x['id'] == id, orders), None)}
+		return order_obj.get_by_id(id,order_obj.get_orders())
 
 
 	def put(self,id):
@@ -55,7 +58,7 @@ class OrderResource(Resource):
 				required=True,
 		)
 		data = parser.parse_args()
-		order_to_edit = next(filter(lambda x:x['id'] == id, orders), None)
+		order_to_edit = order_obj.get_by_id(id,order_obj.get_orders())
 
 		#update order if found
 		if order_to_edit:
