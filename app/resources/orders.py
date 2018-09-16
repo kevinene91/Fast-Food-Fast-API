@@ -21,21 +21,26 @@ class OrderListResource(Resource):
 		parser = reqparse.RequestParser()
 		parser.add_argument("food",type=str,
 		required=True)
+
 		parser.add_argument("quantity",type=int,
 		required=True)
 		data = parser.parse_args()
-
-		food_item = order_obj.get_food_by_name(data['food'],order_obj.get_foods())
-		food_price = food_item['price']   
-		total = order_obj.calculate_total_price(food_price,data['quantity'])
 		
-		order = {
-		'id': inc_id, "customer_name":"nesh",'food':data['food'],
-		'quantity':data['quantity'],'total':total,
-		'status':"pending" 
-		}
-		order_obj.add_order(order)
-		return order, 201
+		#check if food is in menu
+		food_item = order_obj.get_food_by_name(data['food'],order_obj.get_foods())
+		if food_item:
+			food_price = food_item['price']   
+			total = order_obj.calculate_total_price(food_price,data['quantity'])
+			#add default order items
+			order = {
+			'id': inc_id, "customer_name":"nesh",'food':data['food'],
+			'quantity':data['quantity'],'total':total,
+			'status':"pending" 
+			}
+			order_obj.add_order(order)
+			return order, 201
+		else:
+			return {'message': 'no such food item in menu'}, 404
 
 
 class OrderResource(Resource): 
