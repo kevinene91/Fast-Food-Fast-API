@@ -11,3 +11,14 @@ class FoodListResource(Resource):
             return all_foods
         return {"message": "no food items present"}, 404
 
+class FoodResource(Resource):
+    def get(self,id):
+        """
+        Return a specific food item by id
+        """
+        food = order_obj.get_by_id(id,order_obj.get_foods())
+        if food:
+            return food, 200
+        return {"message": "food item does not exist"}, 404
+
+    
