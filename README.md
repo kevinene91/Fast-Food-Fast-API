@@ -1,5 +1,4 @@
 
-
 [![Coverage Status](https://coveralls.io/repos/github/kevinene91/Fast-Food-Fast-API/badge.svg?branch=develop )](https://coveralls.io/github/kevinene91/Fast-Food-Fast-API?branch=develop)[![Build Status](https://travis-ci.org/kevinene91/Fast-Food-Fast-API.svg?branch=develop)](https://travis-ci.org/kevinene91/Fast-Food-Fast-API)
 [![Maintainability](https://api.codeclimate.com/v1/badges/67c0f234dca2f9a3bd78/maintainability)](https://codeclimate.com/github/kevinene91/Fast-Food-Fast-API/maintainability)
 
@@ -48,3 +47,5 @@ API Endpoints
 |/api/v1/orders    |   POST     | add  a new order    |
 |--------------    |----------- | -----------------   |
 |/api/v1/order/<id>|   PUT      |edit the order-status|
+
+
