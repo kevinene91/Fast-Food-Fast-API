@@ -1,0 +1,11 @@
+[
+  "test_orders.py::test_resource_orders_all",
+  "test_orders.py::test_resource_order_add",
+  "test_orders.py::test_resource_order_add_without_data",
+  "test_orders.py::test_resource_add_without_quantity",
+  "test_orders.py::test_resource_add_without_food",
+  "test_orders.py::test_resource_order_get_by_id",
+  "test_orders.py::test_resource_order_get_by_id_str",
+  "test_orders.py::test_resource_order_get_by_nonexisting_id",
+  "test_orders.py::test_resource_order_edit"
+]
