@@ -5,6 +5,7 @@ from instance.config import app_config
 
 # import resources
 from .api.v1.resources.orders import (OrderListResource, OrderResource)
+from .api.v1.resources.foods import (FoodListResource)
 
 def create_app(config_name): 
     """
@@ -21,4 +22,5 @@ def create_app(config_name):
     #register the endpoints
     api.add_resource(OrderListResource, '/orders')
     api.add_resource(OrderResource, '/orders/<int:id>')
+    api.add_resource(FoodListResource, '/foods')
     return app
