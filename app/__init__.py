@@ -4,13 +4,13 @@ from flask import Flask
 from instance.config import app_config 
 
 # import resources
-from app.resources.orders import (OrderListResource, OrderResource)
+from .api.v1.resources.orders import (OrderListResource, OrderResource)
 
 def create_app(config_name): 
     """
         creates the app and registers the endpoints
     """
-    #initialize flas
+    #initialize flask
     app = Flask(__name__, instance_relative_config=True) 
     # add configs
     app.config.from_object(app_config[config_name])
