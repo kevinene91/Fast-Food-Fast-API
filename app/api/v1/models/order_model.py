@@ -44,8 +44,8 @@ class OrderModel(object ):
         return price * quantity
 
     # get list length for  auto-increment 
-    def get_length(self):
-        data_len = len(self.orders)
+    def get_length(self,data):
+        data_len = len(data)
         return data_len
 
     # query by id
