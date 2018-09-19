@@ -33,7 +33,7 @@ def test_resource_foods_get_by_id_str():
         Test to get order but str for id
     """
     response = client.get('api/v1/foods/e')
-    assert(response.status_code == 404)
+    assert(response.status_code == 405)
 
 def test_resource_foods_get_by_nonexisting_id(): 
     """
@@ -72,4 +72,4 @@ def test_resource_order_edit():
         "price": 200
     })
     assert(response.status_code == 201)
-    assert 'completed' in str(response.data)
+    assert 'chips' in str(response.data)
