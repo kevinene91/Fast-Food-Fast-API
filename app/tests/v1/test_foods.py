@@ -61,3 +61,15 @@ def test_resource_add_without_price():
     """
     response = client.post('api/v1/foods', data=price_less_order)
     assert response.status_code == 400
+
+
+def test_resource_order_edit(): 
+    """
+        Test edit by geting right id
+    """
+    response = client.put('api/v1/foods/1', data ={
+        "name": "chips",
+        "price": 200
+    })
+    assert(response.status_code == 201)
+    assert 'completed' in str(response.data)
