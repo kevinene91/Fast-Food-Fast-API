@@ -55,7 +55,7 @@ class OrderResource(Resource):
 		#filter list elements that do no have the id 
 		order = order_obj.get_by_id(id,order_obj.get_orders())
 		if order:
-			return order, 201
+			return order, 200
 		else:
 			message =  "order {} does not exits".format(id)
 			return {"message":message}, 404
