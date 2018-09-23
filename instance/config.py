@@ -7,7 +7,7 @@ class Config(object):
 	"""
 	DEBUG = False 
 	CSRF_ENABLED = True 
-	SECRET = os.getenv('SECRET')
+	SECRET_KEY = os.getenv('SECRET_KEY')
 
 class DevelopmentConfig(Config):
 	"""

@@ -1,10 +1,14 @@
 
 from flask_restful import Resource, reqparse
+from flask_jwt_extended import jwt_required, get_jwt_identity
+
 from ..models.order_model import order_obj
 from flask import jsonify
 
 class OrderListResource(Resource):
 
+	#token required 
+	@jwt_required
 	def get(self): 
 
 		"""
@@ -16,11 +20,12 @@ class OrderListResource(Resource):
 		else:
 			return {"mesage":"no orders present"}
 		
-
+	@jwt_required
 	def post(self):
 		"""
 		Post an order fields input, food, quantity, price, status
 		"""
+		current_user = get_jwt_identity()
 		inc_id = order_obj.get_length(order_obj.get_orders()) + 1
 		parser = reqparse.RequestParser()
 		parser.add_argument("food",type=str,
@@ -31,13 +36,14 @@ class OrderListResource(Resource):
 		data = parser.parse_args()
 		
 		#check if food is in menu
-		food_item = order_obj.get_food_by_name(data['food'],order_obj.get_foods())
+		
+		food_item = order_obj.get_by_name(data['food'],order_obj.get_foods())
 		if food_item:
 			food_price = food_item['price']   
 			total = order_obj.calculate_total_price(food_price,data['quantity'])
 			#add default order items
 			order = {
-			'id': inc_id, "customer_name":"nesh",'food':data['food'],
+			'id': inc_id, "customer_name":current_user['username'],'food':data['food'],
 			'quantity':data['quantity'],'total':total,
 			'status':"pending" 
 			}
@@ -48,6 +54,8 @@ class OrderListResource(Resource):
 
 
 class OrderResource(Resource): 
+	#token required 
+	@jwt_required
 	def get(self,id):
 		"""
 			get a specicfic order via its id
@@ -60,7 +68,8 @@ class OrderResource(Resource):
 			message =  "order {} does not exist".format(id)
 			return {"message":message}, 404
 
-
+	#token required 
+	@jwt_required
 	def put(self,id):
 		"""
 			get an order by its id and update it
@@ -80,5 +89,5 @@ class OrderResource(Resource):
 		else:
 			return {"message":"no item to update"}, 404
 		return order_to_edit, 201
-
+	
  
