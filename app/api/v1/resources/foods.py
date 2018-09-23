@@ -11,8 +11,7 @@ class FoodListResource(Resource):
     parser.add_argument("price",type=int,
     required=True)
 
-   #token required
-    @jwt_required
+   
     def get(self):
         """"
         Return foods list 
@@ -51,8 +50,7 @@ class FoodResource(Resource):
     parser.add_argument("price",type=int,
     required=True)
 
-    #requires a token
-    @jwt_required
+
     def get(self,id):
         """
         Return a specific food item by id

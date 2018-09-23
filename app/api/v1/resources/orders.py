@@ -7,8 +7,7 @@ from flask import jsonify
 
 class OrderListResource(Resource):
 
-	#token required 
-	@jwt_required
+
 	def get(self): 
 
 		"""
@@ -54,8 +53,7 @@ class OrderListResource(Resource):
 
 
 class OrderResource(Resource): 
-	#token required 
-	@jwt_required
+
 	def get(self,id):
 		"""
 			get a specicfic order via its id
