@@ -2,7 +2,8 @@
 language: python 
 
 before install:
-  - export SECRET_KEY="some_jsudg_kinnd_isjs"
+  - export APP_SETTINGS="testing"
+
 
 
 python: 
