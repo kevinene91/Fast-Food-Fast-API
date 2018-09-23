@@ -71,6 +71,8 @@ class LogoutResource(Resource):
     @jwt_required
     def post(self):
         token = request.headers.get('Authorization')
+        if not token:
+            return {"message":"no Auth"}, 401
         user_model.add_to_black_list({'token':token})
         get_token = user_model.get_token(token,user_model.get_all_tokens())
         if get_token:   
