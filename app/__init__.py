@@ -5,6 +5,7 @@ from flask_jwt_extended import JWTManager
 import os
 from instance.config import app_config 
 
+from .api.v1.Landing.views import landing_page
 # import resources
 from .api.v1.resources.orders import (OrderListResource, OrderResource)
 from .api.v1.resources.foods import (FoodListResource, FoodResource, ChangePriceResource)
@@ -26,6 +27,7 @@ def create_app(config_name):
     api = Api(app, prefix='/api/v1')
 
     #register the endpoints
+    app.register_blueprint(landing_page)
     api.add_resource(OrderListResource, '/orders')
     api.add_resource(OrderResource, '/orders/<int:id>')
     api.add_resource(FoodListResource, '/foods')
