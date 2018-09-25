@@ -92,6 +92,6 @@ class OrderResource(Resource):
 			else:
 				return {"message":"no item to update"}, 404
 		
-		return {'message':' mark  as completed or declined'}, 422
+		return {'message':' mark as completed or declined'}, 422
 
  

@@ -98,7 +98,7 @@ def test_resource_order_edit_invalide_status():
         "status": "shoe"
     }, headers=headers)
     assert(response.status_code == 422)
-    assert 'not valid' in str(response.data)
+    assert 'mark as' in str(response.data)
 
 def test_resource_order_add_without_data(): 
     """
