@@ -79,13 +79,20 @@ class OrderResource(Resource):
 				required=True,
 		)
 		data = parser.parse_args()
+		expected = ["completed", "pending", "decline"]
 		order_to_edit = order_obj.get_by_id(id,order_obj.get_orders())
+		
+		correct_status = data['status']
+		message = '{} not valid, mark  as complete or decline'.format(data['status'])
+		#ensure only valid values are allowed
+		if correct_status in expected:
+			#update order if found
+			if order_to_edit:
+				order_to_edit.update(data)
+				return order_to_edit, 201
+			else:
+				return {"message":"no item to update"}, 404
+		
+		return {'message':message}, 422
 
-		#update order if found
-		if order_to_edit:
-			order_to_edit.update(data)
-		else:
-			return {"message":"no item to update"}, 404
-		return order_to_edit, 201
-	
  
