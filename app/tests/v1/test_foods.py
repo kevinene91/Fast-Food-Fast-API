@@ -1,7 +1,6 @@
 
 import pytest
 import json
-from flask_jwt_extended import create_access_token
 from ... import create_app
 
 app = create_app(config_name="testing")
