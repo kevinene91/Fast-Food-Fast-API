@@ -66,6 +66,13 @@ class FoodResource(Resource):
         else:
             return {"message":"no item to update"}, 404
 
+    def delete(self,id):
+        """
+        deelte item
+        """
+        order_obj.delete_item(id,order_obj.get_foods())
+        return {"message":"item has been deleted"}, 202
+
    
 class ChangePriceResource(Resource):
     parser = reqparse.RequestParser()

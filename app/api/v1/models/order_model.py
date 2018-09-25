@@ -52,7 +52,12 @@ class OrderModel(object ):
     def get_by_id(self,id,data):
         return next(filter(lambda x:x['id'] == id, data), None)
 
-                   
+    def delete_item(self,id,data):
+        """
+        filter out the items that do not match id
+        """
+        return list(filter(lambda x:x['id'] != id, data))
+          
 orders =[
     {
         "id": 1,
