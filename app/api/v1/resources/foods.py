@@ -74,8 +74,11 @@ class FoodResource(Resource):
         else:
             return {"message":"no item to update"}, 404
 
+
     #requires a token
     @jwt_required
+
+
     def delete(self,id):
         """
         deelte item
@@ -83,7 +86,9 @@ class FoodResource(Resource):
         order_obj.delete_item(id,order_obj.get_foods())
         return {"message":"item has been deleted"}, 202
 
+
 #admin can alter prices
+
 class ChangePriceResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("price",type=int,

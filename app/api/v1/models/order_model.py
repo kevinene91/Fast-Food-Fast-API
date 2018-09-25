@@ -34,7 +34,6 @@ class OrderModel(BaseModel):
     def calculate_total_price(self, price, quantity):
         return price * quantity
 
-                   
 
 #class instance
 order_obj = OrderModel()
