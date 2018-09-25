@@ -33,7 +33,7 @@ def test_resource_foods_get_by_id_str():
         Test to get order but str for id
     """
     response = client.get('api/v1/foods/e')
-    assert(response.status_code == 404)
+    assert(response.status_code == 405)
 
 def test_resource_foods_get_by_nonexisting_id(): 
     """
@@ -61,3 +61,15 @@ def test_resource_add_without_price():
     """
     response = client.post('api/v1/foods', data=price_less_order)
     assert response.status_code == 400
+
+
+def test_resource_order_edit(): 
+    """
+        Test edit by geting right id
+    """
+    response = client.put('api/v1/foods/1', data ={
+        "name": "chips",
+        "price": 200
+    })
+    assert(response.status_code == 201)
+    assert 'chips' in str(response.data)

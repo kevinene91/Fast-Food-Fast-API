@@ -38,13 +38,44 @@ class FoodListResource(Resource):
        
 
 class FoodResource(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument("name",type=str,
+    required=True)
+
+    parser.add_argument("price",type=int,
+    required=True)
+
     def get(self,id):
         """
         Return a specific food item by id
-        """
+      """
         food = order_obj.get_by_id(id,order_obj.get_foods())
         if food:
             return food, 200
         return {"message": "food item does not exist"}, 404
 
-    
+    def put(self,id):
+        """
+        Edit the the food item details
+        """
+        data= FoodResource.parser.parse_args()
+        food_to_edit = order_obj.get_by_id(id,order_obj.get_foods())
+        if food_to_edit:
+            food_to_edit.update(data)
+            return food_to_edit,201
+        else:
+            return {"message":"no item to update"}, 404
+
+   
+class ChangePriceResource(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument("price",type=int,
+    required=True)
+    def put(self,name):
+        data = ChangePriceResource.parser.parse_args()
+        food_to_edit = order_obj.get_food_by_name(name,order_obj.get_foods())
+        if food_to_edit:
+            food_to_edit.update(data)
+            return food_to_edit,201
+        else:
+            return {"message":"no named item in food list"}, 404
