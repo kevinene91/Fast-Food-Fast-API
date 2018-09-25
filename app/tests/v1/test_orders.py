@@ -1,48 +1,29 @@
 import pytest
 import json
-from app import create_app
+from ... import create_app
 
 app = create_app(config_name="testing")
 client = app.test_client()
 
 order = {
-    "id": 1,
+
     "food": "chips",
     "quantity": 2, 
-    "price": 200,
-    "status": "pending"
 }
 
 empty_order = {}
 
-status_less_order = {
-    "id": 1,
-    "food": "chips",
-    "quantity": 2, 
-    "price": 200,
-}
-
-price_less_order = {
-    "id": 1,
-    "food": "chips",
-    "quantity": 2, 
-    "status": "pending"  
-}
 quantity_less_order = {
-    "id": 1,
+ 
     "food": "chips", 
-    "price": 200,
-    "status": "pending"
+   
 }
 
 food_less_order = {
-    "id": 1, 
-    "quantity": 3,
-    "price": 200,
-    "status": "pending"
+    "quantity": 3, 
 }
 
-
+        
 def test_resource_orders_all(): 
     """
         Test to get all orders
@@ -63,20 +44,6 @@ def test_resource_order_add_without_data():
         Test post without data
     """
     response = client.post('api/v1/orders', data=empty_order)
-    assert response.status_code == 400
-
-def test_resource_add_without_status():
-    """
-        Test post withot status
-    """
-    response = client.post('api/v1/orders', data=status_less_order)
-    assert response.status_code == 400
-
-def test_resource_add_without_price():
-    """
-        Test post withot price
-    """
-    response = client.post('api/v1/orders', data=price_less_order)
     assert response.status_code == 400
 
 def test_resource_add_without_quantity():
@@ -112,7 +79,7 @@ def test_resource_order_get_by_nonexisting_id():
         Test to get order with non-existent id
     """
     response = client.get('api/v1/orders/4')
-    assert 'null' in str(response.data)
+    assert 'does not' in str(response.data)
 
 def test_resource_order_edit(): 
     """
