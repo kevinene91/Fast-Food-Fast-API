@@ -89,6 +89,17 @@ def test_resource_order_edit():
     assert(response.status_code == 201)
     assert 'completed' in str(response.data)
 
+def test_resource_order_edit_invalide_status(): 
+    """
+        Test edit by geting right id
+    """
+    response = client.put('api/v1/orders/1', json ={
+
+        "status": "shoe"
+    }, headers=headers)
+    assert(response.status_code == 422)
+    assert 'not valid' in str(response.data)
+
 def test_resource_order_add_without_data(): 
     """
         Test post without data
