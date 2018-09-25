@@ -21,7 +21,7 @@ class OrderListResource(Resource):
 		"""
 		Post an order fields input, food, quantity, price, status
 		"""
-		inc_id = order_obj.get_length() + 1
+		inc_id = order_obj.get_length(order_obj.get_orders()) + 1
 		parser = reqparse.RequestParser()
 		parser.add_argument("food",type=str,
 		required=True)
@@ -57,7 +57,7 @@ class OrderResource(Resource):
 		if order:
 			return order, 200
 		else:
-			message =  "order {} does not exits".format(id)
+			message =  "order {} does not exist".format(id)
 			return {"message":message}, 404
 
 

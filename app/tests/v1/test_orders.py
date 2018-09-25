@@ -79,7 +79,8 @@ def test_resource_order_get_by_nonexisting_id():
         Test to get order with non-existent id
     """
     response = client.get('api/v1/orders/4')
-    assert 'does not' in str(response.data)
+
+    assert 'exist' in str(response.data)
 
 def test_resource_order_edit(): 
     """
