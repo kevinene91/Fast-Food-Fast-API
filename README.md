@@ -41,21 +41,21 @@ Install the required packages
 
 Use Postman to the test the following endpoints 
 
-API Auth
+# API Auth
 
-|                  |            |                     |
+
 |Endpoint          |   Method   | description         |
-|                  |            |                     |
+|  ------------    | ---------- |  -----------------  |
 |/api/v1/register  |   POST     | add  a new user     |
 |                  |            |                     |
 |/api/v1/login     |   POST     |User Login token     |
 |                  |            |                     | 
 |/api/v1/logout    |   POST     | User logout         |
 
-API Endpoints
+# API Endpoints
 
 |   # Endpoint     |  # Methods | # Description       |Auth Required |
-|                  |            |                     |              |
+|   -----------    | ---------- | -----------------   | ------------ |
 |/api/v1/foods     |   GET      |  list all foods     |    No        |
 |                  |            |                     |              | 
 |/api/v1/food/<id> |   GET      | get a specific food |    No        |
@@ -83,4 +83,4 @@ API Endpoints
 
 ### Author 
 
-Kevin Munene
+# Kevin Munene
