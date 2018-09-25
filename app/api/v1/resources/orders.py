@@ -83,7 +83,7 @@ class OrderResource(Resource):
 		order_to_edit = order_obj.get_by_id(id,order_obj.get_orders())
 		
 		correct_status = data['status']
-		message = '{} not valid, use mark complete or decline'.format(data['status'])
+		message = '{} not valid, mark  as complete or decline'.format(data['status'])
 		#ensure only valid values are allowed
 		if correct_status in expected:
 			#update order if found

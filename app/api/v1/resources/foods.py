@@ -77,8 +77,6 @@ class FoodResource(Resource):
 
     #requires a token
     @jwt_required
-
-
     def delete(self,id):
         """
         deelte item
