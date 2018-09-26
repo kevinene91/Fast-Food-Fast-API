@@ -19,6 +19,7 @@ install:
 befor-script: 
   - psql -c "CREATE DATABASE fastfoodfast;" -U postgres
   - psql -c "CREATE DATABASE testfastfoodfast;" -U postgres
+  - psql -c "CREATE USER nesh WITH PASSWORD '';" -U postgres
 
 
 script: 
