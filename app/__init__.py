@@ -5,6 +5,8 @@ from flask_jwt_extended import JWTManager
 import os
 from instance.config import app_config 
 
+from .api.v2.db.conn import create_db
+
 # import resources
 from .api.v1.resources.orders import (OrderListResource, OrderResource)
 from .api.v1.resources.foods import (FoodListResource, FoodResource, ChangePriceResource)
@@ -20,13 +22,15 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     #add the prefix
-
+    create_db()
     jwt = JWTManager(app)
 
     api = Api(app, prefix='/api/v1')
 
-    #register the endpoints
-    api.add_resource(OrderListResource, '/orders')
+    api2 = Api(app, prefix='/api/v2')
+
+    #register v1 endpoints
+    api.add_resource(OrderListResource, '/orders')  
     api.add_resource(OrderResource, '/orders/<int:id>')
     api.add_resource(FoodListResource, '/foods')
     api.add_resource(FoodResource, '/foods/<int:id>')
