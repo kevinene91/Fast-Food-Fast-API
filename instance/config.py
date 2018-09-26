@@ -8,6 +8,8 @@ class Config(object):
 	DEBUG = False 
 	CSRF_ENABLED = True 
 	SECRET_KEY = os.getenv('SECRET_KEY')
+	POSTGRES_DATABASE_URI = os.getenv('DB_URL')
+
 
 class DevelopmentConfig(Config):
 	"""
@@ -22,6 +24,8 @@ class TestingConfig(Config):
 	"""
 	Testing = True
 	DEBUG = True
+	POSTGRES_DATABASE_URI = os.getenv('TEST_DATABASE_URL')
+
 
 class ProductionConfig(Config): 
 	"""
