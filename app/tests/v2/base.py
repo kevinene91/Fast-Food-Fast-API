@@ -1,6 +1,6 @@
 import unittest
 from ... import create_app
-from ...api.v2.db.conn import create_db, drop_db
+from ...api.v2.db.conn import _create_db, drop_db
 
 class BaseTest(unittest.TestCase):
 
@@ -24,7 +24,7 @@ class BaseTest(unittest.TestCase):
         self.app = create_app(config_name='testing')
         self.client = self.app.test_client()
         self.headers = self.generate_headers()
-        self.user=[ {"username":"testuser",  "email": "testuser@gmail.com","password":"password"},{},
+        self.user=[ {"username":"njoki",  "email": "njokiusers@gmail.com","password":"password"},{},
         {"email": "testuser@gmail.com","password":"passsss"}, {"email": "test@gmail.com","password":"password"}
         ]
         self.meals =[{"name":"maziwa","price":80}, {}, {"name":"juice","price":80},
@@ -34,7 +34,7 @@ class BaseTest(unittest.TestCase):
         self.menuitem=[{"meal_id":1,"menu_id":1,"no_available":1},{}]
 
         with self.app.app_context():
-            self.db = create_db
+            self.db = _create_db
 
     def tearDown(self):
          with self.app.app_context():

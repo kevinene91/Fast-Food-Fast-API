@@ -5,8 +5,8 @@ from .base import BaseTest
 
 class AuthEndpointTestCase(BaseTest):
 
-    def test_register_user(self):
-        response = self.client.post('api/v2/auth/signup', json=self.user[0])
+    def test_register_correct_user(self):
+        response = self.client.post('api/v2/auth/signup', json=self.user[1])
         self.assertEqual(response.status_code, 201)
 
     def test_register_already_registered(self):
@@ -17,7 +17,7 @@ class AuthEndpointTestCase(BaseTest):
     def test_register_without_data(self):
         response = self.client.post('api/v2/auth/signup',json=self.user[1])
         self.assertEqual(response.status_code, 400)
-        self.assertIn('inputs missing', str(response.json))
+        self.assertIn('message', str(response.json))
 
     def test_register_with_invalid_email(self):
         response = self.client.post('api/v2/auth/signup',json=self.user[1])
@@ -25,12 +25,12 @@ class AuthEndpointTestCase(BaseTest):
     
     def test_user_login(self):
         response = self.client.post('api/v2/auth/login',json=self.user[0])
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 201)
 
     def test_user_login_without_data(self):
         response = self.client.post('api/v2/auth/login',json=self.user[1])
         self.assertEqual(response.status_code, 400)
-        self.assertIn('inputs missing', str(response.json))
+        self.assertIn('message', str(response.json))
 
     def test_login_invalid_email(self):
         response = self.client.post('api/v2/auth/login',json=self.user[3])
@@ -39,6 +39,8 @@ class AuthEndpointTestCase(BaseTest):
     def test_login_invalid_password(self):
         response = self.client.post('api/v2/auth/login',json=self.user[2])
         self.assertEqual(response.status_code, 400)
+
+  
         
 if __name__ == "__main__":
     unittest.main()
