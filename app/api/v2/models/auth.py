@@ -28,21 +28,20 @@ class UserModel:
         con.close()
         return response
 
-    
 
     def save(self):
-        conn = self.db
-        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        data, conn = None, self.db
+        cursor = conn.cursor()
         try:
             query = "INSERT INTO users (user_name, email, password, role) values(%s, %s, %s, %s)"
             cursor.execute(query, (self.username,self.email,self.password, self.role  ))
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
-            return data
         except Exception as e:
             print(e)
-    
+        return data
+       
 
 
     

@@ -21,7 +21,7 @@ dt2 =""" CREATE TABLE IF NOT EXISTS meals(
 
 dt3 = """ CREATE TABLE IF NOT EXISTS menus(
     menu_id SERIAL PRIMARY KEY NOT NULL,
-    meal_name VARCHAR(255) NOT NULL,
+    menu_name VARCHAR(255) NOT NULL,
     created_at timestamp with time zone DEFAULT now()
 );""" 
 
