@@ -8,9 +8,11 @@ from instance.config import app_config
 from .api.v2.db.conn import create_db
 
 # import resources
-from .api.v1.resources.orders import (OrderListResource, OrderResource)
-from .api.v1.resources.foods import (FoodListResource, FoodResource, ChangePriceResource)
-from .api.v1.resources.auth import RegisterResource, LoginResource, LogoutResource
+from .api.v2.resources.orders import (OrdersListResource, OrdersResource, UsersOrdersResource)
+from .api.v2.resources.meals import (FoodListResource, FoodResource)
+from .api.v2.resources.auth import (RegisterResource, LoginResource)
+from .api.v2.resources.menu_items import (MenuItemResource, MenuItemListResource)
+from .api.v2.resources.menu import (MenuListResource, MenuResource)
 
 def create_app(config_name): 
     """
@@ -25,17 +27,23 @@ def create_app(config_name):
     create_db()
     jwt = JWTManager(app)
 
-    api = Api(app, prefix='/api/v1')
 
     api2 = Api(app, prefix='/api/v2')
 
     #register v1 endpoints
-    api.add_resource(OrderListResource, '/orders')  
-    api.add_resource(OrderResource, '/orders/<int:id>')
-    api.add_resource(FoodListResource, '/foods')
-    api.add_resource(FoodResource, '/foods/<int:id>')
-    api.add_resource(ChangePriceResource, '/foods/<string:name>')
-    api.add_resource(RegisterResource, '/register')
-    api.add_resource(LoginResource, '/login')
-    api.add_resource(LogoutResource,'/logout')
+
+    #register v2 endpointscl
+    api2.add_resource(RegisterResource, '/auth/signup')
+    api2.add_resource(LoginResource, '/auth/login')
+    api2.add_resource(UsersOrdersResource, '/user/orders')
+    api2.add_resource(OrdersListResource, '/orders')
+    api2.add_resource(OrdersResource, '/orders/<int:id>')
+    api2.add_resource(MenuListResource, '/menu')
+    api2.add_resource(MenuResource, '/menu/<int:id>')
+    api2.add_resource(FoodListResource, '/meals')
+    api2.add_resource(FoodResource, '/meals/<int:id>')
+    api2.add_resource(MenuItemResource, '/menuitem/<int:id>')
+    api2.add_resource(MenuItemListResource, '/menuitem')
+
+    # api2.add_resource(LogoutResource,'/logout')
     return app

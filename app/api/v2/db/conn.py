@@ -1,6 +1,6 @@
 import psycopg2
 import os 
-from .tables import queries
+from .tables import queries, to_drop
 
 #create a connection
 def create_conn():
@@ -17,4 +17,16 @@ def create_db():
 
     curr.close()
     conn.commit()
-    conn.close()
+    return conn
+
+def drop_db():
+    conn = create_conn()
+    curr = conn.cursor()
+    try: 
+        for query in to_drop:
+            curr.execute(query)
+
+        curr.close()
+        conn.commit()
+    except:
+        print("failed")
