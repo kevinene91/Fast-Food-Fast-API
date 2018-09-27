@@ -14,7 +14,7 @@ def _create_conn():
 
 #Create Database tables for tests
 def _create_db(): 
-    conn = create_conn()
+    conn = _create_conn()
     curr = conn.cursor()
     for query in queries:
         curr.execute(query)

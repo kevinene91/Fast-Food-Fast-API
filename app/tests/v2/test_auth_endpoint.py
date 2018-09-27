@@ -5,9 +5,6 @@ from .base import BaseTest
 
 class AuthEndpointTestCase(BaseTest):
 
-    def test_register_correct_user(self):
-        response = self.client.post('api/v2/auth/signup', json=self.user[1])
-        self.assertEqual(response.status_code, 201)
 
     def test_register_already_registered(self):
         response = self.client.post('api/v2/auth/signup',json=self.user[0])
