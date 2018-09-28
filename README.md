@@ -2,9 +2,9 @@
 # Fast-Food-Fast-API 
 FastFood API is a REST API that fetches that allows its user to order for food
 ### Coveralls 
-[![Coverage Status](https://coveralls.io/repos/github/kevinene91/Fast-Food-Fast-API/badge.svg?branch=develop )](https://coveralls.io/github/kevinene91/Fast-Food-Fast-API?branch=develop )
+[![Coverage Status](https://coveralls.io/repos/github/kevinene91/Fast-Food-Fast-API/badge.svg?branch=develop )](https://coveralls.io/github/kevinene91/Fast-Food-Fast-API?branch=challnge-two )
 ### Travis badge 
-[![Build Status](https://travis-ci.org/kevinene91/Fast-Food-Fast-API.svg?branch=develop)](https://travis-ci.org/kevinene91/Fast-Food-Fast-API)
+[![Build Status](https://travis-ci.org/kevinene91/Fast-Food-Fast-API.svg?branch=challnge-two)](https://travis-ci.org/kevinene91/Fast-Food-Fast-API)
 [![Maintainability](https://api.codeclimate.com/v1/badges/67c0f234dca2f9a3bd78/maintainability)](https://codeclimate.com/github/kevinene91/Fast-Food-Fast-API/maintainability)
 
 ### Flask FAST FOOD FAST
