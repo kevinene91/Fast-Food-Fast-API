@@ -15,7 +15,7 @@ dt1 = """ CREATE TABLE IF NOT EXISTS users(
 dt2 =""" CREATE TABLE IF NOT EXISTS meals(
     meal_id SERIAL PRIMARY KEY NOT NULL,
     meal_name VARCHAR(255) NOT NULL,
-    price NUMERIC NOT NULL,
+    price REAL NOT NULL,
     created_at timestamp with time zone DEFAULT now()
 );"""
 
