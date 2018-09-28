@@ -9,9 +9,9 @@ class MenuResource(Resource):
     required = True)
     
     def get(self,id):
-        data = {"menu_id":id}
+        data = {"meal_id":id}
         menu = MenuModel(data).get_by_id()
-        message = "no menu with {}".format(id)
+        message = "no  with {}".format(id)
         if menu:
             return jsonify(menu)
         return {"message":message}, 404

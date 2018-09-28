@@ -79,7 +79,7 @@ class FoodResource(Resource):
     @jwt_required
     def delete(self,id):
         """
-        deelte item
+        dete item
         """
         order_obj.delete_item(id,order_obj.get_foods())
         return {"message":"item has been deleted"}, 202
