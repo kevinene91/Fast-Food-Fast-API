@@ -1,11 +1,10 @@
 [
-  "test_menu.py::MenuTestCase::test_menu_resource_add",
-  "test_menu.py::MenuTestCase::test_menu_resource_add_empty",
-  "test_menu.py::MenuTestCase::test_menu_resource_add_existing_food",
-  "test_menu.py::MenuTestCase::test_menu_resource_delete",
-  "test_menu.py::MenuTestCase::test_menu_resource_delete_non_existent",
-  "test_menu.py::MenuTestCase::test_menu_resource_edit",
-  "test_menu.py::MenuTestCase::test_menu_resource_edit_non_existent",
-  "test_menu.py::MenuTestCase::test_menu_resource_get_non_existent",
-  "test_menu.py::MenuTestCase::test_menu_resource_get_specific"
+  "test_orders.py::OrderTestCase::test_menuitem_resource_get_non_existent",
+  "test_orders.py::OrderTestCase::test_order_resource_add",
+  "test_orders.py::OrderTestCase::test_order_resource_add_empty",
+  "test_orders.py::OrderTestCase::test_order_resource_add_existing_order",
+  "test_orders.py::OrderTestCase::test_order_resource_delete",
+  "test_orders.py::OrderTestCase::test_order_resource_delete_non_existent",
+  "test_orders.py::OrderTestCase::test_order_resource_edit_non_existent",
+  "test_orders.py::OrderTestCase::test_order_resource_get_specific"
 ]

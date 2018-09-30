@@ -16,11 +16,12 @@ class FoodResource(Resource):
     
     def get(self,id):
         data = {"meal_id":id}
-        menu = MealModel(data).get_by_id()
+        meal = MealModel(data).get_by_id()
         message = "no meal with id {}".format(id)
-        if menu:
-            return jsonify(menu)
+        if meal:
+            return jsonify(meal)
         return {"message":message}, 404
+        
     @jwt_required
     def put(self,id):
         parsed_data = FoodResource.parser.parse_args()
@@ -32,6 +33,7 @@ class FoodResource(Resource):
             updated = MealModel(data).get_by_id()
             return jsonify(updated)
         return {"message":"No item to update"}, 404
+
     @jwt_required
     def delete(self,id):
         data = {"meal_id":id}
@@ -69,7 +71,7 @@ class FoodListResource(Resource):
     
     @jwt_required
     def get(self):
-        data ={"table_name":"menus"}
+        data ={"table_name":"meals"}
         mylist = MealModel(data).get_all()
         return jsonify(mylist)
 
