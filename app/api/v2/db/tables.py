@@ -3,7 +3,7 @@ Creating Data Tables
 """
 
 dt1 = """ CREATE TABLE IF NOT EXISTS users(
-    user_id SERIAL PRIMARY KEY NOT NULL,
+    user_id serial PRIMARY KEY NOT NULL,
     user_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -13,20 +13,20 @@ dt1 = """ CREATE TABLE IF NOT EXISTS users(
 );"""
 
 dt2 =""" CREATE TABLE IF NOT EXISTS meals(
-    meal_id SERIAL PRIMARY KEY NOT NULL,
+    meal_id serial PRIMARY KEY NOT NULL,
     meal_name VARCHAR(255) NOT NULL,
     price REAL NOT NULL,
     created_at timestamp with time zone DEFAULT now()
 );"""
 
 dt3 = """ CREATE TABLE IF NOT EXISTS menus(
-    menu_id SERIAL PRIMARY KEY NOT NULL,
+    menu_id serial PRIMARY KEY NOT NULL,
     menu_name VARCHAR(255) NOT NULL,
     created_at timestamp with time zone DEFAULT now()
 );""" 
 
 dt4 = """ CREATE TABLE IF NOT EXISTS menuitems(
-    menuitem_id SERIAL PRIMARY KEY NOT NULL,
+    menuitem_id serial PRIMARY KEY NOT NULL,
     meal_id INTEGER NOT NULL,
     menu_id INTEGER NOT NULL,
     no_available INTEGER NOT NULL,
@@ -40,7 +40,7 @@ dt4 = """ CREATE TABLE IF NOT EXISTS menuitems(
 
 
 dt5 = """ CREATE TABLE IF NOT EXISTS orders(
-    order_id SERIAL PRIMARY KEY NOT NULL,
+    order_id serial PRIMARY KEY NOT NULL,
     menuitem_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL,

@@ -24,7 +24,9 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
     #add the prefix
-    create_db()
+    with app.app_context():
+        create_db()
+        
     jwt = JWTManager(app)
 
 

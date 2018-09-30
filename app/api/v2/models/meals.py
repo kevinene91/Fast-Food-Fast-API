@@ -1,6 +1,7 @@
 from ..db.conn import create_conn
 from psycopg2.extras import RealDictCursor
 
+
 class MealModel:
     def __init__(self, data={}):
         self.meal_name = data.get('meal_name')
@@ -8,6 +9,7 @@ class MealModel:
         self.price = data.get('price')
         self.table = data.get('table_name')
         self.db = create_conn()
+      
 
     def get_by_id(self):
         con, response = self.db, None
@@ -25,7 +27,7 @@ class MealModel:
         cur = con.cursor()
         try:
             
-            cur.execute("select * from me WHERE meal_name='{}'".format(self.meal_name))
+            cur.execute("select * from meals WHERE meal_name='{}'".format(self.meal_name))
             response = cur.fetchall()
         except Exception as e:
             print(e)
@@ -33,16 +35,15 @@ class MealModel:
         return response
 
     def update_name(self):
-        con = self.db
+        con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("UPDATE menus SET meal_name='{}' WHERE meal_id='{}'".format(self.meal_name,self.meal_id))
-
+            cur.execute("UPDATE meals SET meal_name='{}' WHERE meal_id='{}'".format(self.meal_name,self.meal_id))
+            con.commit()
         except Exception as e:
             print(e)
         con.close()
         
-
 
     def get_all(self):
         con, response = self.db, None
@@ -59,7 +60,8 @@ class MealModel:
         con= self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("delete from menus where menu_id='{}'".format(self.menu_id))
+            cur.execute("delete from meals where meal_id='{}'".format(self.meal_id))
+            con.commit()
         except Exception as e:
             print(e)
         con.close()

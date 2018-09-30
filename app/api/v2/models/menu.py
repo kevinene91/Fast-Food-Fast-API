@@ -1,5 +1,6 @@
 from ..db.conn import create_conn
 from psycopg2.extras import RealDictCursor
+import json
 
 class MenuModel:
     def __init__(self, data={}):
@@ -32,11 +33,11 @@ class MenuModel:
         return response
 
     def update_name(self):
-        con = self.db
+        con= self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute("UPDATE menus SET menu_name='{}' WHERE menu_id='{}'".format(self.menu_name,self.menu_id))
-
+            con.commit()
         except Exception as e:
             print(e)
         con.close()
@@ -76,3 +77,9 @@ class MenuModel:
             print(e)
         return data
             
+    def is_json(self,data):
+        try:
+            json.loads(data)
+        except ValueError:
+            return False
+        return True

@@ -1,6 +1,5 @@
 
 import os 
-
 class Config(object): 
 	"""
 	Base config
@@ -10,13 +9,11 @@ class Config(object):
 	SECRET_KEY = os.getenv('SECRET_KEY')
 	POSTGRES_DATABASE_URI = os.getenv('DB_URL')
 
-
 class DevelopmentConfig(Config):
 	"""
 		Config for development
 	"""
 	DEBUG = True
-
 
 class TestingConfig(Config): 
 	"""
@@ -33,7 +30,6 @@ class ProductionConfig(Config):
 	"""
 	DEBUG = False 
 	Testing = False
-
 
 app_config = {
 	'development': DevelopmentConfig, 
