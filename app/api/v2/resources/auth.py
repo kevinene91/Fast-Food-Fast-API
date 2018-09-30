@@ -36,6 +36,7 @@ class RegisterResource(Resource):
 
 class LoginResource(Resource):
     parser = reqparse.RequestParser()
+
     parser.add_argument('email',
     type = str,
     required = True)
@@ -47,10 +48,10 @@ class LoginResource(Resource):
     def post(self):
         data = LoginResource.parser.parse_args()
         user = UserModel(data).get_user_by_email()
-        if len(user):
+        if user:
             if enc.check_password_hash(user[0].get('password'), data['password']):
                 access_token = create_access_token(identity=user[0].get('user_id'))
-                return {"message":"user logged in", "acces_token":access_token}, 201
+                return {"message":"user logged in", "access_token":access_token}, 201
         return {"message":"username and password do not match"}, 400
 
 class LogoutResource(Resource):

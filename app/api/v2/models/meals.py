@@ -1,19 +1,21 @@
 from ..db.conn import create_conn
 from psycopg2.extras import RealDictCursor
-import json
 
-class MenuModel:
+
+class MealModel:
     def __init__(self, data={}):
-        self.menu_name = data.get('menu_name')
-        self.menu_id = data.get('menu_id')
+        self.meal_name = data.get('meal_name')
+        self.meal_id = data.get('meal_id')
+        self.price = data.get('price')
         self.table = data.get('table_name')
         self.db = create_conn()
+      
 
     def get_by_id(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select * from menus WHERE menu_id='{}'".format(self.menu_id))
+            cur.execute("select * from meals WHERE meal_id='{}'".format(self.meal_id))
             response = cur.fetchone()
         except Exception as e:
             print(e)
@@ -25,7 +27,7 @@ class MenuModel:
         cur = con.cursor()
         try:
             
-            cur.execute("select * from menus WHERE menu_name='{}'".format(self.menu_name))
+            cur.execute("select * from meals WHERE meal_name='{}'".format(self.meal_name))
             response = cur.fetchall()
         except Exception as e:
             print(e)
@@ -33,16 +35,15 @@ class MenuModel:
         return response
 
     def update_name(self):
-        con= self.db
+        con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("UPDATE menus SET menu_name='{}' WHERE menu_id='{}'".format(self.menu_name,self.menu_id))
+            cur.execute("UPDATE meals SET meal_name='{}' WHERE meal_id='{}'".format(self.meal_name,self.meal_id))
             con.commit()
         except Exception as e:
             print(e)
         con.close()
         
-
 
     def get_all(self):
         con, response = self.db, None
@@ -59,7 +60,8 @@ class MenuModel:
         con= self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("delete from menus where menu_id='{}'".format(self.menu_id))
+            cur.execute("delete from meals where meal_id='{}'".format(self.meal_id))
+            con.commit()
         except Exception as e:
             print(e)
         con.close()
@@ -68,7 +70,7 @@ class MenuModel:
         data, conn = None, self.db
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "insert into menus (menu_name) values('{}')".format(self.menu_name)
+            query = "insert into meals (meal_name, price) values('{}','{}')".format(self.meal_name, self.price)
             cursor.execute(query)
             conn.commit()
             data = cursor.fetchone()
@@ -77,9 +79,3 @@ class MenuModel:
             print(e)
         return data
             
-    def is_json(self,data):
-        try:
-            json.loads(data)
-        except ValueError:
-            return False
-        return True

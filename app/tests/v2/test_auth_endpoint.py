@@ -37,7 +37,7 @@ class AuthEndpointTestCase(BaseTest):
         response = self.client.post('api/v2/auth/login',json=self.user[2])
         self.assertEqual(response.status_code, 400)
 
-  
+   
         
 if __name__ == "__main__":
     unittest.main()
