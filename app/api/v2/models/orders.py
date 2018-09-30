@@ -8,6 +8,7 @@ class OrderModel:
     declined = 3
 
     def __init__(self, data={}):
+        self.order_id = data.get('order_id')
         self.meal_id = data.get('meal_id')
         self.user_id = data.get('user_id')
         self.username = data.get('user_name')
