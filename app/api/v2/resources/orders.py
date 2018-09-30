@@ -4,7 +4,7 @@ import simplejson as json
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models.orders import OrderModel
 
-class OrdersListResource(Resource):
+class CustomersOrdersListResource(Resource):
     parser = reqparse.RequestParser()
     
     parser.add_argument('meal_id',
@@ -17,7 +17,7 @@ class OrdersListResource(Resource):
     
     @jwt_required   
     def post(self):
-        parsed_data = OrdersListResource.parser.parse_args()
+        parsed_data = CustomersOrdersListResource.parser.parse_args()
         if OrderModel(parsed_data).get_meal_name() == None:
             return {"message":"meal item does not exists"}, 422
         else:
@@ -34,15 +34,21 @@ class OrdersListResource(Resource):
             OrderModel(data).save()
             data_to_return = {'meal_name':meal_name['meal_name'], 'ordered_by':user_name['user_name'], 'total':total}
             return (data_to_return) 
-        
+
+    @jwt_required
+    def get(self):
+        user_id = get_jwt_identity()
+        data = {"user_id":user_id}
+        orders = OrderModel(data).get_user_orders()
+        return jsonify(orders)
+
+class AdminOrdersListResource(Resource):
     @jwt_required
     def get(self):
         data ={"table_name":"orders"}
         mylist = OrderModel(data).get_all()
         return jsonify(mylist)
 
-  
-   
 class OrdersResource(Resource):
 
     #get a specific order 
@@ -55,6 +61,11 @@ class OrdersResource(Resource):
         return {"message":message}, 404
        
 
-   
-class UsersOrdersResource(Resource):
-    pass
+class AdminOrdersResource(Resource):
+    def put(self, id):
+        pass
+
+    def get(self, id):
+        pass
+    
+    

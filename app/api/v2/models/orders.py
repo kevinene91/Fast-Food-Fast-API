@@ -79,6 +79,17 @@ class OrderModel:
         except Exception as e:
             print(e)
         con.close()
+
+    def get_user_orders(self):
+        con, response = self.db, None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute("select * from orders where user_id='{}'".format(self.user_id))
+            response = cur.fetchall()
+        except Exception as e:
+            print(e)
+        con.close()
+        return response
         
 
     def get_all(self):
