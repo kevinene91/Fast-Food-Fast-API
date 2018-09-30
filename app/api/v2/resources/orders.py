@@ -6,6 +6,7 @@ from ..models.orders import OrderModel
 
 class OrdersListResource(Resource):
     parser = reqparse.RequestParser()
+    
     parser.add_argument('meal_id',
     type = int,
     required = True)
@@ -33,6 +34,12 @@ class OrdersListResource(Resource):
             OrderModel(data).save()
             data_to_return = {'meal_name':meal_name['meal_name'], 'ordered_by':user_name['user_name'], 'total':total}
             return (data_to_return) 
+        
+    @jwt_required
+    def get(self):
+        data ={"table_name":"orders"}
+        mylist = OrderModel(data).get_all()
+        return jsonify(mylist)
 
   
    
