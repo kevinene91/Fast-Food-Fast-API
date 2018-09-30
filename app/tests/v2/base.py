@@ -17,7 +17,7 @@ class BaseTest(unittest.TestCase):
         self.user=[ {"username":"njoki", "email": "njokiusers@gmail.com","password":"password"},{},
         {"email": "testuser@gmail.com","password":"passsss"}, {"email": "test@gmail.com","password":"password"}]
         self.meals =[{"meal_name":"sausage","price":80}, {}, {"meal_name":"juice","price":80}]
-        self.orders=[{"user_id":1,"total":300,"status":1,"menuitem_id":1},{},{"user_id":2,"total":300,"status":2,"menuitem_id":2}]
+        self.orders=[{"meal_id":1, "quantity":1},{},{"quantity":2,"meal_id":2}]
         self.menu= [{"menu_name":"breakfast"}, {},{"name":"supper"}]
         self.menuitem=[{"meal_id":1,"menu_id":1,"no_available":1},{}]
         #create user 
@@ -29,6 +29,10 @@ class BaseTest(unittest.TestCase):
                 'Authorization': 'Bearer {}'.format(token),
                 'Content-Type': 'application/json'
             }
+        #create meals 
+        self.client.post('/api/v2/meals', json=self.meals[0], headers=self.headers)
+
+
       
 
     def tearDown(self):
