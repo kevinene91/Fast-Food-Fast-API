@@ -44,7 +44,16 @@ class OrdersListResource(Resource):
   
    
 class OrdersResource(Resource):
-   pass
+
+    #get a specific order 
+    def get(self,id):
+        data = {"order_id":id}
+        meal = OrderModel(data).get_by_id()
+        message = "no order with {}".format(id)
+        if meal:
+            return jsonify(meal)
+        return {"message":message}, 404
+       
 
    
 class UsersOrdersResource(Resource):
