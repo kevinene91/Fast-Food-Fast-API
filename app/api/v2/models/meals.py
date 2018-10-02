@@ -38,7 +38,7 @@ class MealModel:
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("UPDATE meals SET meal_name='{}' WHERE meal_id='{}'".format(self.meal_name,self.meal_id))
+            cur.execute("UPDATE meals SET meal_name='{}', price='{}' WHERE meal_id='{}'".format(self.meal_name, self.price, self.meal_id))
             con.commit()
         except Exception as e:
             print(e)

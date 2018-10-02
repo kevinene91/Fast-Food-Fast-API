@@ -4,7 +4,7 @@ from psycopg2.extras import RealDictCursor
 
 class OrderModel:
     pending = 1,
-    completed =2, 
+    completed = 2, 
     declined = 3
 
     def __init__(self, data={}):
@@ -19,7 +19,6 @@ class OrderModel:
         self.status_default = 1
         self.db = create_conn()
       
-
     def get_by_id(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
@@ -71,26 +70,27 @@ class OrderModel:
         return price * quantity
 
     def update_status(self):
-        con, response = self.db, None
+        con = self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("UPDATE orders SET status='{}' WHERE order_id='{}'".format(self.status,self.meal_id))
+            cur.execute("UPDATE orders SET status='{}' WHERE order_id='{}'"
+                        .format(self.status, self.order_id))
             con.commit()
         except Exception as e:
             print(e)
         con.close()
-
+    
     def get_user_orders(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select * from orders where user_id='{}'".format(self.user_id))
+            cur.execute("select * from orders where user_id='{}'"
+                        .format(self.user_id))
             response = cur.fetchall()
         except Exception as e:
             print(e)
         con.close()
         return response
-        
 
     def get_all(self):
         con, response = self.db, None
@@ -104,10 +104,11 @@ class OrderModel:
         return response
 
     def delete(self):
-        con= self.db
+        con = self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("delete from meals where meal_id='{}'".format(self.meal_id))
+            cur.execute("delete from orders where order_id='{}'"
+                        .format(self.order_id))
             con.commit()
         except Exception as e:
             print(e)

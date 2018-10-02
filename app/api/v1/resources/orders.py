@@ -5,8 +5,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models.order_model import order_obj
 from flask import jsonify
 
-class OrderListResource(Resource):
 
+class OrderListResource(Resource):
 
 	def get(self): 
 
@@ -17,7 +17,7 @@ class OrderListResource(Resource):
 		if allorders:
 			return allorders
 		else:
-			return {"mesage":"no orders present"}
+			return {"mesage": "no orders present"}
 		
 	@jwt_required
 	def post(self):
