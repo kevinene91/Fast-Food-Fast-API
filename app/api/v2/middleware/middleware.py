@@ -2,8 +2,8 @@ from functools import wraps
 from ..models.auth import UserModel 
 from flask import request
 from flask import jsonify, make_response, abort
-from flask_jwt_extended import (jwt_required,
-                                     get_jwt_identity)
+from flask_jwt_extended import (jwt_required, 
+                                verify_jwt_in_request, get_jwt_identity)
 
 
 def norm_auth(fn):
