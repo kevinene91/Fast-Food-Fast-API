@@ -11,9 +11,12 @@ password = BCRYPT.generate_password_hash('testme').decode('utf-8')
 
 # create a connection
 def create_conn():
-    url = current_app.config.get('POSTGRES_DATABASE_URI')
-    conn = psycopg2.connect(url)
-    return conn
+    url = current_app.config.get('POSTGRE_DATABASE_URI')
+    try:
+        conn = psycopg2.connect(url)
+        return conn
+    except psycopg2.DatabaseError, e:
+        return {'message': '{}'.format(e)}
 
 
 def save_test_data():
@@ -25,8 +28,8 @@ def save_test_data():
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return "message :{}".e
 
 
 # Create Database tables
@@ -52,6 +55,6 @@ def drop_db():
 
         curr.close()
         conn.commit()
-    except:
-        print("failed")
+    except psycopg2.DatabaseError as e:
+        return "message :{}".e
 

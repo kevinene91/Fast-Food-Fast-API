@@ -7,7 +7,7 @@ class Config(object):
 	DEBUG = False 
 	CSRF_ENABLED = True 
 	SECRET_KEY = os.getenv('SECRET_KEY')
-	POSTGRES_DATABASE_URI = os.getenv('DB_URL')
+	POSTGRES_DATABASE_URI = os.getenv('DBDATABASE_URL')
 
 class DevelopmentConfig(Config):
 	"""
