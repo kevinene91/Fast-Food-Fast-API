@@ -1,8 +1,10 @@
 from flask_restful import Resource, reqparse
 from flask import jsonify
+
 import simplejson as json
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models.orders import OrderModel
+from ..middleware.middleware import norm_auth, admin_auth
 
 
 class CustomersOrdersListResource(Resource):
@@ -15,7 +17,7 @@ class CustomersOrdersListResource(Resource):
                         type=int,
                         required=True)
 
-    @jwt_required
+    @norm_auth
     def post(self):
         parsed_data = CustomersOrdersListResource.parser.parse_args()
         if OrderModel(parsed_data).get_meal_name() is None:
@@ -23,18 +25,18 @@ class CustomersOrdersListResource(Resource):
         else:
             current_user = get_jwt_identity()
             # user_data = {'user_name':user_name}
-            user_id = {'user_id': current_user}
-            token_id = current_user
+            user_id = {'user_id': current_user[0]}
+            token_id = current_user[0]
             user_name = OrderModel(user_id).get_user_name()
             meal_name = OrderModel(parsed_data).get_meal_name()
             total = OrderModel(parsed_data).calculate_price()
             data = {'meal_id': parsed_data['meal_id'], 'user_id': token_id,
                     'quantity': parsed_data['quantity'], 'total': total}
             OrderModel(data).save()
-            data_to_return = {'meal_name': meal_name['meal_name'], 'ordered_by' :user_name['user_name'], 'total':total}
+            data_to_return = {'meal_name': meal_name['meal_name'], 'ordered_by': user_name['user_name'], 'total':total}
             return (data_to_return), 201
 
-    @jwt_required
+    @norm_auth
     def get(self):
         user_id = get_jwt_identity()
         data = {"user_id": user_id}
@@ -43,9 +45,9 @@ class CustomersOrdersListResource(Resource):
 
 
 class AdminOrdersListResource(Resource):
-    @jwt_required
+    @admin_auth
     def get(self):
-        data ={"table_name":"orders"}
+        data = {"table_name": "orders"}
         mylist = OrderModel(data).get_all()
         return jsonify(mylist)
 
@@ -57,6 +59,7 @@ class OrdersResource(Resource):
                         required=True)
                 
     # get a specific order 
+    @admin_auth
     def get(self, id):
         data = {"order_id": id}
         meal = OrderModel(data).get_by_id()
@@ -65,6 +68,7 @@ class OrdersResource(Resource):
             return jsonify(meal)
         return {"message": message}, 404
 
+    @admin_auth
     def put(self, id):
         parsed_data = OrdersResource.parser.parse_args()
         expected = [2, 3]
@@ -81,7 +85,7 @@ class OrdersResource(Resource):
             return {"message": message}, 404
         return {"message": "set to complete or decline"}
         
-    @jwt_required
+    @admin_auth
     def delete(self, id):
         data = {"order_id": id}
         order = OrderModel(data).get_by_id()
@@ -96,5 +100,3 @@ class OrdersResource(Resource):
                 print(e)
 
         return {"message": "item does not exist"}, 404
-
-

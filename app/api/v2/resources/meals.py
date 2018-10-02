@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import jsonify
 from ..models.meals import MealModel
-from flask_jwt_extended import jwt_required
+from ..middleware.middleware import norm_auth, admin_auth
 
 
 class FoodResource(Resource):
@@ -13,7 +13,7 @@ class FoodResource(Resource):
     parser.add_argument('price',
                         type=str,
                         required=True)
-                        
+    @norm_auth        
     def get(self, id):
         data = {"meal_id": id}
         meal = MealModel(data).get_by_id()
@@ -22,7 +22,7 @@ class FoodResource(Resource):
             return jsonify(meal)
         return {"message": message}, 404
         
-    @jwt_required
+    @admin_auth
     def put(self, id):
         parsed_data = FoodResource.parser.parse_args()
         data = {"meal_id": id}
@@ -37,7 +37,7 @@ class FoodResource(Resource):
             return response
         return {"message": "No item to update"}, 404
 
-    @jwt_required
+    @admin_auth
     def delete(self, id):
         data = {"meal_id": id}
         menu = MealModel(data).get_by_id()
@@ -64,7 +64,7 @@ class FoodListResource(Resource):
                         type=str,
                         required=True)
     
-    @jwt_required
+    @admin_auth
     def post(self):
         data = FoodListResource.parser.parse_args()
         if MealModel(data).get_by_name():
@@ -74,7 +74,7 @@ class FoodListResource(Resource):
             return {"meal_name": data['meal_name'],
                     "price": data['price']}, 201
     
-    @jwt_required
+    @norm_auth
     def get(self):
         data = {"table_name": "meals"}
         mylist = MealModel(data).get_all()

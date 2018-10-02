@@ -2,6 +2,8 @@
 Creating Data Tables
 """
 
+
+
 dt1 = """ CREATE TABLE IF NOT EXISTS users(
     user_id serial PRIMARY KEY NOT NULL,
     user_name VARCHAR(255) NOT NULL,
@@ -40,6 +42,7 @@ dt5 = """ CREATE TABLE IF NOT EXISTS orders(
     FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON UPDATE CASCADE ON DELETE CASCADE );
 """
+
 
 
 drop_dt1 = """ DROP TABLE IF EXISTS users CASCADE
