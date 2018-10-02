@@ -11,7 +11,7 @@ from .api.v2.db.conn import create_db
 from .api.v2.resources.orders import (CustomersOrdersListResource, OrdersResource, AdminOrdersListResource)
 from .api.v2.resources.meals import (FoodListResource, FoodResource)
 from .api.v2.resources.auth import (RegisterResource, LoginResource)
-from .api.v2.resources.menu import (MenuListResource, MenuResource)
+
 
 def create_app(config_name): 
     """
@@ -39,8 +39,6 @@ def create_app(config_name):
     api2.add_resource(AdminOrdersListResource, '/orders')
     api2.add_resource(CustomersOrdersListResource, '/users/orders')
     api2.add_resource(OrdersResource, '/orders/<int:id>')
-    api2.add_resource(MenuListResource, '/menu')
-    api2.add_resource(MenuResource, '/menu/<int:id>')
     api2.add_resource(FoodListResource, '/meals')
     api2.add_resource(FoodResource, '/meals/<int:id>')
     
