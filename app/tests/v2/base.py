@@ -13,15 +13,15 @@ class BaseTest(unittest.TestCase):
         # initialize the DB
         with self.app.app_context():
             create_db()
-        
+
         # test data
         self.user = [{"username": "njoki", "email": "njokiusers@gmail.com",
                      "password": "password"}, {"email": 
                      "testuser@gmail.com", "password": "passsss"}, {},  
                      {'username': 'testuser', 'email': 'testuser@gmail.com', 
                      'password': 'testme'}]
-        self.test_user = {'username': 'testuser', 'email': 'testuser@gmail.com', 
-                     'password': 'testme'}
+        self.test_user = {'username': 'testuser', 'email': 
+                          'testuser@gmail.com', 'password': 'testme'}
         self.meals = [
              {"meal_name": "mayai", "price": 100}, {},
              {"meal_name": "juice", "price": 80}]
@@ -53,9 +53,9 @@ class BaseTest(unittest.TestCase):
         self.client.post('/api/v2/meals', json=self.meals[0],
                          headers=self.admin_headers)
         # create orders
-        # self.client.post('/api/v2/users/orders', json=self.orders[0],
-        #                  headers=self.headers)  
-              
+        self.client.post('/api/v2/users/orders', json=self.orders[0],
+                         headers=self.headers)  
+
     def tearDown(self):
         with self.app.app_context():
             drop_db()

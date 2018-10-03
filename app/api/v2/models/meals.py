@@ -1,5 +1,6 @@
 from ..db.conn import create_conn
 from psycopg2.extras import RealDictCursor
+import psycopg2
 
 
 class MealModel:
@@ -10,7 +11,6 @@ class MealModel:
         self.table = data.get('table_name')
         self.db = create_conn()
       
-
     def get_by_id(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
@@ -70,7 +70,8 @@ class MealModel:
         data, conn = None, self.db
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "insert into meals (meal_name, price) values('{}','{}')".format(self.meal_name, self.price)
+            query = "insert into meals (meal_name, price) values('{}','{}')".format(self.meal_name,
+                                    self.price)
             cursor.execute(query)
             conn.commit()
             data = cursor.fetchone()

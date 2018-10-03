@@ -1,4 +1,5 @@
 from ..db.conn import create_conn
+import psycopg2
 from flask_bcrypt import Bcrypt
 from psycopg2.extras import RealDictCursor
 from app.bcrypt import BCRYPT
@@ -11,6 +12,7 @@ class UserModel:
     def __init__(self, data={}):
         self.username = data.get('username')
         self.email = data.get('email')
+        self.blacked = data.get('token')
         self.role = UserModel.customer
         self.user_id = data.get('user_id')
         self.password = BCRYPT.generate_password_hash(data.get('password')).decode('utf-8')
@@ -45,15 +47,26 @@ class UserModel:
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
             query = "INSERT INTO users (user_name, email, password, role) values(%s, %s, %s, %s)"
-            cursor.execute(query, (self.username,self.email,self.password, self.role  ))
+            cursor.execute(query, (self.username, self.email, self.password, 
+                                   self.role))
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
         return data
-       
 
+    def blacklist():
+        conn, response = self.db, None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute("INSERT INTO blacklisted (token) values(%s)"
+                        .format(self.blacked))
+            response = cur.fethone()
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}        
+        return response     
+        
 
     
 

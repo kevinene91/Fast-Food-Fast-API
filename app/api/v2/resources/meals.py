@@ -1,3 +1,4 @@
+import psycopg2
 from flask_restful import Resource, reqparse
 from flask import jsonify
 from ..models.meals import MealModel
@@ -13,6 +14,7 @@ class FoodResource(Resource):
     parser.add_argument('price',
                         type=str,
                         required=True)
+    
     @norm_auth        
     def get(self, id):
         data = {"meal_id": id}
@@ -21,13 +23,13 @@ class FoodResource(Resource):
         if meal:
             return jsonify(meal)
         return {"message": message}, 404
-        
+
     @admin_auth
     def put(self, id):
         parsed_data = FoodResource.parser.parse_args()
         data = {"meal_id": id}
         data_to_update = {"meal_name": parsed_data['meal_name'],
-                          "price": parsed_data['price'], "meal_id":id}
+                          "price": parsed_data['price'], "meal_id": id}
         menu = MealModel(data).get_by_id()
         if menu:
             MealModel(data_to_update).update_name()
@@ -59,11 +61,11 @@ class FoodListResource(Resource):
     parser.add_argument('meal_name',
                         type=str,
                         required=True)
-    
+
     parser.add_argument('price',
                         type=str,
                         required=True)
-    
+
     @admin_auth
     def post(self):
         data = FoodListResource.parser.parse_args()
@@ -73,10 +75,9 @@ class FoodListResource(Resource):
             MealModel(data).save()
             return {"meal_name": data['meal_name'],
                     "price": data['price']}, 201
-    
+
     @norm_auth
     def get(self):
         data = {"table_name": "meals"}
         mylist = MealModel(data).get_all()
         return jsonify(mylist)
-

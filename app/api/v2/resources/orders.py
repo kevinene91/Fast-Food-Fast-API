@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from flask import jsonify
-
 import simplejson as json
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models.orders import OrderModel

@@ -20,7 +20,6 @@ def admin_auth(fn):
     def wrapper(*args, **kwargs):
         verify_jwt_in_request()
         claims = get_jwt_identity()
-        print(claims)
         if claims[1] != 2:
             abort(
                 make_response(
