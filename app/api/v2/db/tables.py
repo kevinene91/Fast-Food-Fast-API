@@ -44,7 +44,6 @@ dt5 = """ CREATE TABLE IF NOT EXISTS orders(
 """
 
 
-
 drop_dt1 = """ DROP TABLE IF EXISTS users CASCADE
 
 """

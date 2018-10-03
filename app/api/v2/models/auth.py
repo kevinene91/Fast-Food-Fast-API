@@ -16,15 +16,14 @@ class UserModel:
         self.password = BCRYPT.generate_password_hash(data.get('password')).decode('utf-8')
         self.db = create_conn()
 
-
     def get_user_by_email(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
             cur.execute("select * from users WHERE email='{}'".format(self.email))
             response = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -37,10 +36,9 @@ class UserModel:
             response = cur.fethone()
             if response == 2:
                 return True
-            else:
-                return False
-        except Exception as e:
-            prin(e)
+            return False
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
 
     def save(self):
         data, conn = None, self.db
@@ -51,8 +49,8 @@ class UserModel:
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         return data
        
 

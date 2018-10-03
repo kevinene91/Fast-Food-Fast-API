@@ -23,7 +23,7 @@ class BaseTest(unittest.TestCase):
         self.test_user = {'username': 'testuser', 'email': 'testuser@gmail.com', 
                      'password': 'testme'}
         self.meals = [
-             {"meal_name": "sausage", "price": 80}, {},
+             {"meal_name": "mayai", "price": 100}, {},
              {"meal_name": "juice", "price": 80}]
         self.orders = [{"meal_id": 1, "quantity": 1}, {},
                        {"quantity": 2, "meal_id": 2}, {'status': 3}]
@@ -53,8 +53,8 @@ class BaseTest(unittest.TestCase):
         self.client.post('/api/v2/meals', json=self.meals[0],
                          headers=self.admin_headers)
         # create orders
-        self.client.post('/api/v2/users/orders', json=self.orders[0],
-                         headers=self.headers)
+        # self.client.post('/api/v2/users/orders', json=self.orders[0],
+        #                  headers=self.headers)
               
     def tearDown(self):
         with self.app.app_context():

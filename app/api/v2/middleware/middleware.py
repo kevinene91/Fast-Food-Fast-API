@@ -24,7 +24,7 @@ def admin_auth(fn):
         if claims[1] != 2:
             abort(
                 make_response(
-                    jsonify({'message': 'unauthorized to perform  function'})
+                    jsonify({'message': 'unauthorized to perform  function'}), 401
                 )
             )
         return fn(*args, **kwargs)

@@ -19,7 +19,7 @@ def create_conn():
         return {'message': '{}'.format(e)}
 
 
-def save_test_data():
+def save_test_user():
         conn = create_conn()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
@@ -29,7 +29,33 @@ def save_test_data():
             data = cursor.fetchone()
             cursor.close()   
         except psycopg2.DatabaseError as e:
-            return e
+            return {'message': '{}'.format(e)}
+
+
+def save_test_meal():
+        conn = create_conn()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "INSERT INTO meals (meal_name, price) values(%s, %s)"
+            cursor.execute(query, ('mayai', 100))
+            conn.commit()
+            data = cursor.fetchone()
+            cursor.close()   
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
+
+
+def save_test_order():
+        conn = create_conn()
+        cursor = conn.cursor(cursor_factory=RealDictCursor)
+        try:
+            query = "INSERT INTO orders (meal_id, quantity) values(%s, %s)"
+            cursor.execute(query, (1, 3))
+            conn.commit()
+            data = cursor.fetchone()
+            cursor.close()   
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
 
 
 # Create Database tables
@@ -39,7 +65,9 @@ def create_db():
     conn.autocommit = True
     for query in queries:
         curr.execute(query)
-    save_test_data()
+    save_test_user()
+    save_test_meal()
+    save_test_order()
     curr.close()
     conn.commit()
     return conn
