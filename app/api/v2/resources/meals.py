@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 from flask import jsonify
 from ..models.meals import MealModel
 from ..middleware.middleware import norm_auth, admin_auth
-
+import psycopg2
 
 class FoodResource(Resource):
     parser = reqparse.RequestParser()

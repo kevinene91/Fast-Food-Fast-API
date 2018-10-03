@@ -1,4 +1,5 @@
 from ..db.conn import create_conn
+import psycopg2
 from flask_bcrypt import Bcrypt
 from psycopg2.extras import RealDictCursor
 from app.bcrypt import BCRYPT
@@ -45,7 +46,8 @@ class UserModel:
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
             query = "INSERT INTO users (user_name, email, password, role) values(%s, %s, %s, %s)"
-            cursor.execute(query, (self.username,self.email,self.password, self.role  ))
+            cursor.execute(query, (self.username, self.email, self.password, 
+                                   self.role))
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   

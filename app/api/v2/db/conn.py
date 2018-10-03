@@ -85,4 +85,3 @@ def drop_db():
         conn.commit()
     except psycopg2.DatabaseError as e:
         return "message :{}".e
-

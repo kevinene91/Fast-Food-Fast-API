@@ -2,8 +2,6 @@
 Creating Data Tables
 """
 
-
-
 dt1 = """ CREATE TABLE IF NOT EXISTS users(
     user_id serial PRIMARY KEY NOT NULL,
     user_name VARCHAR(255) NOT NULL,
@@ -14,7 +12,7 @@ dt1 = """ CREATE TABLE IF NOT EXISTS users(
     created_at timestamp with time zone DEFAULT now()
 );"""
 
-dt2 =""" CREATE TABLE IF NOT EXISTS meals(
+dt2 = """ CREATE TABLE IF NOT EXISTS meals(
     meal_id serial PRIMARY KEY NOT NULL,
     meal_name VARCHAR(255) NOT NULL,
     price INTEGER NOT NULL,

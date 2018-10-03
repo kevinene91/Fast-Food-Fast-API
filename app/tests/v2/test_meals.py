@@ -43,11 +43,13 @@ class MealsTestCase(BaseTest):
         self.assertEqual(response.status_code, 201)
         
     def test_food_resource_delete(self):
-        response = self.client.delete('api/v2/meals/1', headers=self.admin_headers)
+        response = self.client.delete('api/v2/meals/1',
+                                      headers=self.admin_headers)
         self.assertEqual(response.status_code, 202)
 
     def test_food_resource_delete_non_existent(self):
-        response = self.client.delete('api/v2/meals/56', headers=self.admin_headers)
+        response = self.client.delete('api/v2/meals/56',
+                                      headers=self.admin_headers)
         self.assertEqual(response.status_code, 404)
         self.assertIn('not exist', str(response.json))
 

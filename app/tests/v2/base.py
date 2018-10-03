@@ -53,9 +53,9 @@ class BaseTest(unittest.TestCase):
         self.client.post('/api/v2/meals', json=self.meals[0],
                          headers=self.admin_headers)
         # create orders
-        # self.client.post('/api/v2/users/orders', json=self.orders[0],
-        #                  headers=self.headers)  
-              
+        self.client.post('/api/v2/users/orders', json=self.orders[0],
+                         headers=self.headers)  
+
     def tearDown(self):
         with self.app.app_context():
             drop_db()
