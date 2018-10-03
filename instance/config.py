@@ -32,11 +32,11 @@ class ProductionConfig(Config):
     """
     Production config
     """
-    DEBUG = False 
+    DEBUG = False
     Testing = False
-    
-    app_config = {
-        'development': DevelopmentConfig, 
-        'production': ProductionConfig, 
-        'testing': TestingConfig,
-        }
+
+app_config = {
+   'development': DevelopmentConfig, 
+   'production': ProductionConfig,
+   'testing': TestingConfig,
+}
