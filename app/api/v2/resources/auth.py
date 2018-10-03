@@ -1,7 +1,7 @@
 from flask_restful import Resource, reqparse
 from flask import jsonify 
 from flask_jwt_extended import (create_access_token, jwt_required,
-                                refresh_access_token, get_jwt_identity)
+                                create_refresh_token, get_jwt_identity)
 from flask_bcrypt import Bcrypt
 from ..models.auth import UserModel
 from ..middleware.middleware import admin_auth, norm_auth
@@ -60,11 +60,10 @@ class LoginResource(Resource):
         return {"message": "username and password do not match"}, 400
 
 
-class LogoutResource(Resource):
-    
-    @norm_auth
-    def post(self):
-        current_user = 
-        logged_out = AuthModel().blacklist()
-        message = {"message": "logged out "}
-        unset 
+# class LogoutResource(Resource):
+#     @norm_auth
+#     def post(self):
+#         current_user = 
+#         logged_out = AuthModel().blacklist()
+#         message = {"message": "logged out "}
+#         unset 
