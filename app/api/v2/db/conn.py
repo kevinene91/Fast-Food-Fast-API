@@ -23,7 +23,8 @@ def save_test_user():
         conn = create_conn()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "INSERT INTO users (user_name, email, password, role) values(%s, %s, %s, %s)"
+            query = """INSERT INTO users (user_name, email, password, role) 
+                    values(%s, %s, %s, %s) """
             cursor.execute(query, ('testuser', 'testuser@gmail.com', password, 2))
             conn.commit()
             data = cursor.fetchone()

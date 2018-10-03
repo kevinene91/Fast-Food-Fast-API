@@ -16,7 +16,6 @@ class RegisterResource(Resource):
     parser.add_argument('username',
                         type=str,
                         required=True)
-
     parser.add_argument('password',
                         type=str,
                         required=True)
@@ -33,7 +32,7 @@ class RegisterResource(Resource):
             UserModel(data).save()
             return {"message": "user registered"}, 201
         return {"message": "invalid input"}
-            
+
 
 class LoginResource(Resource):
     parser = reqparse.RequestParser()
@@ -52,18 +51,10 @@ class LoginResource(Resource):
         user_id = user[0]['user_id']
         role = user[0]['role']
         if user:
-            if enc.check_password_hash(user[0].get('password'), data['password']):
+            if enc.check_password_hash(user[0].get('password'), 
+                                       data['password']):
                 access_token = create_access_token(identity=(user_id, role))
                 refresh_token = create_refresh_token(identity=(user_id, role))
                 return {"message": "user logged in", "access_token":
                         access_token}, 201
         return {"message": "username and password do not match"}, 400
-
-
-# class LogoutResource(Resource):
-#     @norm_auth
-#     def post(self):
-#         current_user = 
-#         logged_out = AuthModel().blacklist()
-#         message = {"message": "logged out "}
-#         unset 

@@ -32,9 +32,11 @@ class CustomersOrdersListResource(Resource):
             data = {'meal_id': parsed_data['meal_id'], 'user_id': token_id,
                     'quantity': parsed_data['quantity'], 'total': total}
             OrderModel(data).save()
-            data_to_return = {'meal_name': meal_name['meal_name'], 'ordered_by': user_name['user_name'], 'total':total}
+            data_to_return = {'meal_name': meal_name['meal_name'],
+                              'ordered_by': user_name['user_name'],
+                              'total': total}
             return (data_to_return), 201
-
+    
     @norm_auth
     def get(self):
         user_id = get_jwt_identity()[0]
@@ -56,8 +58,8 @@ class OrdersResource(Resource):
     parser.add_argument('status',
                         type=int,
                         required=True)
-                
-    # get a specific order 
+
+    # get a specific order
     @admin_auth
     def get(self, id):
         data = {"order_id": id}
@@ -83,7 +85,7 @@ class OrdersResource(Resource):
                 return response
             return {"message": message}, 404
         return {"message": "set to complete or decline"}
-        
+
     @admin_auth
     def delete(self, id):
         data = {"order_id": id}

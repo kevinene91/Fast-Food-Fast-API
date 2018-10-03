@@ -14,7 +14,7 @@ class FoodResource(Resource):
     parser.add_argument('price',
                         type=str,
                         required=True)
-    
+                        
     @norm_auth        
     def get(self, id):
         data = {"meal_id": id}
