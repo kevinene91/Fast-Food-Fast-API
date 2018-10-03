@@ -13,15 +13,15 @@ class BaseTest(unittest.TestCase):
         # initialize the DB
         with self.app.app_context():
             create_db()
-        
+
         # test data
         self.user = [{"username": "njoki", "email": "njokiusers@gmail.com",
                      "password": "password"}, {"email": 
                      "testuser@gmail.com", "password": "passsss"}, {},  
                      {'username': 'testuser', 'email': 'testuser@gmail.com', 
                      'password': 'testme'}]
-        self.test_user = {'username': 'testuser', 'email': 'testuser@gmail.com', 
-                     'password': 'testme'}
+        self.test_user = {'username': 'testuser', 'email': 
+                          'testuser@gmail.com', 'password': 'testme'}
         self.meals = [
              {"meal_name": "mayai", "price": 100}, {},
              {"meal_name": "juice", "price": 80}]

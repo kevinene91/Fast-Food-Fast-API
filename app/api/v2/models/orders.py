@@ -119,13 +119,14 @@ class OrderModel:
         data, conn = None, self.db
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "insert into orders (meal_id, user_id, quantity, total, status) values('{}','{}','{}','{}','{}')"
-                                                    .format(self.meal_id,  self.user_id,  self.quantity, self.total, self.status_default)
+            query = "insert into orders (meal_id, user_id, quantity, total, status) values('{}','{}','{}','{}','{}')".format(self.meal_id,  self.user_id,  self.quantity, self.total, self.status_default)
             cursor.execute(query)
             conn.commit()
             data = cursor.fetchone()
-            cursor.close()   
-        except psycopg2.DatabaseError as e:
-            return {'message': '{}'.format(e)}
+            cursor.close()
+        except Exception as e:
+            print(e)
+        # except psycopg2.DatabaseError as e:
+        #         return{'message': '{}'.format(e)}
         return data
             

@@ -23,8 +23,7 @@ dt3 = """ CREATE TABLE IF NOT EXISTS menus(
     menu_id serial PRIMARY KEY NOT NULL,
     menu_name VARCHAR(255) NOT NULL,
     created_at timestamp with time zone DEFAULT now()
-);""" 
-
+);"""
 
 
 dt5 = """ CREATE TABLE IF NOT EXISTS orders(
@@ -40,6 +39,14 @@ dt5 = """ CREATE TABLE IF NOT EXISTS orders(
     FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON UPDATE CASCADE ON DELETE CASCADE );
 """
+
+
+dt6 = """" CREATE TABLE IF NOT EXISTS blacklisted(
+    black_id serial PRIMARY KEY NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    created_at timestamp with time zone DEFAULT now()
+)
+""""
 
 
 drop_dt1 = """ DROP TABLE IF EXISTS users CASCADE
@@ -59,6 +66,6 @@ drop_dt5 = """ DROP TABLE IF EXISTS menuitems CASCADE
 """
 
 
-to_drop = [drop_dt1, drop_dt2, drop_dt3, drop_dt4, drop_dt5]
+to_drop = [drop_dt1, drop_dt2, drop_dt3, drop_dt6, drop_dt5]
 
 queries = [dt1, dt2, dt5]

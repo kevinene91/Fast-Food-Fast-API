@@ -12,6 +12,7 @@ class UserModel:
     def __init__(self, data={}):
         self.username = data.get('username')
         self.email = data.get('email')
+        self.blacked = data.get('token')
         self.role = UserModel.customer
         self.user_id = data.get('user_id')
         self.password = BCRYPT.generate_password_hash(data.get('password')).decode('utf-8')
@@ -54,8 +55,18 @@ class UserModel:
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
         return data
-       
 
+    def blacklist():
+        conn, response = self.db, None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute("INSERT INTO blacklisted (token) values(%s)"
+                        .format(self.blacked))
+            response = cur.fethone()
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}        
+        return response     
+        
 
     
 
