@@ -54,7 +54,7 @@ class LoginResource(Resource):
         if user:
             if enc.check_password_hash(user[0].get('password'), data['password']):
                 access_token = create_access_token(identity=(user_id, role))
-                refresh_token = refresh_access_token(identity=(user_id, role))
+                refresh_token = create_refresh_token(identity=(user_id, role))
                 return {"message": "user logged in", "access_token":
                         access_token}, 201
         return {"message": "username and password do not match"}, 400
