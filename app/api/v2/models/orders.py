@@ -25,8 +25,8 @@ class OrderModel:
         try:
             cur.execute("select * from orders WHERE order_id='{}'".format(self.order_id))
             response = cur.fetchone()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -47,8 +47,8 @@ class OrderModel:
         try:
             cur.execute("select user_name from users WHERE user_id='{}'".format(self.user_id))
             response = cur.fetchone()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -59,8 +59,8 @@ class OrderModel:
             cur.execute("select price from meals WHERE meal_id='{}'".format(self.meal_id))
             response = cur.fetchone()[0]
 
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -76,19 +76,19 @@ class OrderModel:
             cur.execute("UPDATE orders SET status='{}' WHERE order_id='{}'"
                         .format(self.status, self.order_id))
             con.commit()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
     
     def get_user_orders(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select * from orders where user_id='{}'"
+            cur.execute("select * from orders where user_id='{}' "
                         .format(self.user_id))
             response = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -98,8 +98,8 @@ class OrderModel:
         try:
             cur.execute("select * from {}".format(self.table))
             response = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -110,8 +110,8 @@ class OrderModel:
             cur.execute("delete from orders where order_id='{}'"
                         .format(self.order_id))
             con.commit()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
 
     def save(self):
@@ -123,7 +123,7 @@ class OrderModel:
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         return data
             

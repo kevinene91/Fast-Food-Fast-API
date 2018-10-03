@@ -16,31 +16,45 @@ class BaseTest(unittest.TestCase):
         
         # test data
         self.user = [{"username": "njoki", "email": "njokiusers@gmail.com",
-                     "password": "password"}, {}, {"email": 
-                     "testuser@gmail.com", "password": "passsss"}, 
-                     {"email": "test@gmail.com", "password": "password"}]
+                     "password": "password"}, {"email": 
+                     "testuser@gmail.com", "password": "passsss"}, {},  
+                     {'username': 'testuser', 'email': 'testuser@gmail.com', 
+                     'password': 'testme'}]
+        self.test_user = {'username': 'testuser', 'email': 'testuser@gmail.com', 
+                     'password': 'testme'}
         self.meals = [
-             {"meal_name": "sausage", "price": 80}, {}, 
+             {"meal_name": "mayai", "price": 100}, {},
              {"meal_name": "juice", "price": 80}]
-        self.orders = [{"meal_id": 1, "quantity": 1}, {}, 
+        self.orders = [{"meal_id": 1, "quantity": 1}, {},
                        {"quantity": 2, "meal_id": 2}, {'status': 3}]
         self.menu = [{"menu_name": "breakfast"}, {}, {"name": "supper"}]
         self.menuitem = [{"meal_id": 1, "menu_id": 1, "no_available": 1}, {}]
+
         # create user 
         self.client.post('/api/v2/auth/signup', json=self.user[0])
         response = self.client.post('/api/v2/auth/login', json=self.user[0])
         if response:
             token = response.get_json().get('access_token')
-        self. headers = {
+        self.headers = {
                 'Authorization': 'Bearer {}'.format(token),
                 'Content-Type': 'application/json'
             }
+
+        # login admin user
+        response = self.client.post('/api/v2/auth/login', json=self.test_user)
+        if response:
+            admin_token = response.get_json().get('access_token')
+        self.admin_headers = {
+                'Authorization': 'Bearer {}'.format(admin_token),
+                'Content-Type': 'application/json'
+            }
+
         # ceate meals
         self.client.post('/api/v2/meals', json=self.meals[0],
-                         headers=self.headers)  
+                         headers=self.admin_headers)
         # create orders
-        self.client.post('/api/v2/users/orders', json=self.orders[0],
-                         headers=self.headers)
+        # self.client.post('/api/v2/users/orders', json=self.orders[0],
+        #                  headers=self.headers)  
               
     def tearDown(self):
         with self.app.app_context():

@@ -2,6 +2,8 @@
 Creating Data Tables
 """
 
+
+
 dt1 = """ CREATE TABLE IF NOT EXISTS users(
     user_id serial PRIMARY KEY NOT NULL,
     user_name VARCHAR(255) NOT NULL,

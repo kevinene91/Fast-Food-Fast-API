@@ -17,8 +17,8 @@ class MealModel:
         try:
             cur.execute("select * from meals WHERE meal_id='{}'".format(self.meal_id))
             response = cur.fetchone()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -29,8 +29,8 @@ class MealModel:
             
             cur.execute("select * from meals WHERE meal_name='{}'".format(self.meal_name))
             response = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -40,8 +40,8 @@ class MealModel:
         try:
             cur.execute("UPDATE meals SET meal_name='{}', price='{}' WHERE meal_id='{}'".format(self.meal_name, self.price, self.meal_id))
             con.commit()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         
 
@@ -51,8 +51,8 @@ class MealModel:
         try:
             cur.execute("select * from {}".format(self.table))
             response = cur.fetchall()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
         return response
 
@@ -62,8 +62,8 @@ class MealModel:
         try:
             cur.execute("delete from meals where meal_id='{}'".format(self.meal_id))
             con.commit()
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         con.close()
 
     def save(self):
@@ -75,7 +75,7 @@ class MealModel:
             conn.commit()
             data = cursor.fetchone()
             cursor.close()   
-        except Exception as e:
-            print(e)
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
         return data
             
