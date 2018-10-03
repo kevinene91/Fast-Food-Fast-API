@@ -84,7 +84,7 @@ class OrderModel:
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select * from orders where user_id='{}'"
+            cur.execute("select * from orders where user_id='{}' "
                         .format(self.user_id))
             response = cur.fetchall()
         except psycopg2.DatabaseError as e:

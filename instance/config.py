@@ -1,9 +1,10 @@
 
 import os 
 class Config(object): 
-	"""
-	Base config
-	"""
+
+    """
+    Base config
+    """
 	DEBUG = False 
 	CSRF_ENABLED = True 
 	SECRET_KEY = os.getenv('SECRET_KEY')

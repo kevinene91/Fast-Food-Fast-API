@@ -38,7 +38,7 @@ class CustomersOrdersListResource(Resource):
 
     @norm_auth
     def get(self):
-        user_id = get_jwt_identity()
+        user_id = get_jwt_identity()[0]
         data = {"user_id": user_id}
         orders = OrderModel(data).get_user_orders()
         return jsonify(orders)
