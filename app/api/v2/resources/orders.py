@@ -4,6 +4,7 @@ import simplejson as json
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from ..models.orders import OrderModel
 from ..middleware.middleware import norm_auth, admin_auth
+from app.jwt import jwt
 
 
 class CustomersOrdersListResource(Resource):
@@ -32,7 +33,9 @@ class CustomersOrdersListResource(Resource):
             data = {'meal_id': parsed_data['meal_id'], 'user_id': token_id,
                     'quantity': parsed_data['quantity'], 'total': total}
             OrderModel(data).save()
-            data_to_return = {'meal_name': meal_name['meal_name'], 'ordered_by': user_name['user_name'], 'total':total}
+            data_to_return = {'meal_name': meal_name['meal_name'], 
+                              'ordered_by': user_name['user_name'], 
+                              'total': total}
             return (data_to_return), 201
 
     @norm_auth
@@ -56,7 +59,7 @@ class OrdersResource(Resource):
     parser.add_argument('status',
                         type=int,
                         required=True)
-                
+       
     # get a specific order 
     @admin_auth
     def get(self, id):

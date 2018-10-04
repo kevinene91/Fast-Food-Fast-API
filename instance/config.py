@@ -6,10 +6,12 @@ class Config(object):
     """
     Base config
      """
-    DEBUG = False 
-    CSRF_ENABLED = True 
+    DEBUG = False
+    CSRF_ENABLED = True
     SECRET_KEY = os.getenv('SECRET_KEY')
     POSTGRES_DATABASE_URI = os.getenv('DATABASE_URL')
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access']
 
 
 class DevelopmentConfig(Config):

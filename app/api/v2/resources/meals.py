@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse
 from flask import jsonify
 from ..models.meals import MealModel
 from ..middleware.middleware import norm_auth, admin_auth
+from app.jwt import jwt
 
 
 class FoodResource(Resource):
@@ -14,7 +15,7 @@ class FoodResource(Resource):
     parser.add_argument('price',
                         type=str,
                         required=True)
-    
+
     @norm_auth        
     def get(self, id):
         data = {"meal_id": id}

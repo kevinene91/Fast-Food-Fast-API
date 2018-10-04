@@ -1,14 +1,16 @@
 from flask import Blueprint
 from flask_restful import Api
+from flask_jwt_extended import JWTManager
 
 from .resources.orders import (CustomersOrdersListResource, 
-                              OrdersResource, AdminOrdersListResource)
+                               OrdersResource, AdminOrdersListResource)
 from .resources.meals import (FoodListResource, FoodResource)
-from .resources.auth import (RegisterResource, LoginResource)
+from .resources.auth import (RegisterResource, LoginResource, LogoutResource)
 
 apiv2 = Blueprint('apiv2', __name__)
 
 api2 = Api(apiv2, prefix='/api/v2')
+
 
 # register v2 endpoints
 api2.add_resource(RegisterResource, '/auth/signup')
@@ -18,4 +20,4 @@ api2.add_resource(CustomersOrdersListResource, '/users/orders')
 api2.add_resource(OrdersResource, '/orders/<int:id>')
 api2.add_resource(FoodListResource, '/menu')
 api2.add_resource(FoodResource, '/meals/<int:id>')
-
+api2.add_resource(LogoutResource, '/auth/logout')

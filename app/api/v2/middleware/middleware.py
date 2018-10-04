@@ -2,6 +2,7 @@ from functools import wraps
 from ..models.auth import UserModel 
 from flask import request
 from flask import jsonify, make_response, abort
+# from app.api.v2 import jwt
 from flask_jwt_extended import (jwt_required, 
                                 verify_jwt_in_request, get_jwt_identity)
 
@@ -23,7 +24,8 @@ def admin_auth(fn):
         if claims[1] != 2:
             abort(
                 make_response(
-                    jsonify({'message': 'unauthorized to perform  function'}), 401
+                    jsonify({'message': 'unauthorized to perform  function'}), 
+                    401
                 )
             )
         return fn(*args, **kwargs)

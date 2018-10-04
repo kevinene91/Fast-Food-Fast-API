@@ -19,12 +19,13 @@ class OrderModel:
         self.table = data.get('table_name')
         self.status_default = 1
         self.db = create_conn()
-   
+
     def get_by_id(self):
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select * from orders WHERE order_id='{}'".format(self.order_id))
+            cur.execute("""select * from orders WHERE order_id='{}'
+            """.format(self.order_id))
             response = cur.fetchone()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
@@ -35,7 +36,8 @@ class OrderModel:
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select meal_name from meals WHERE meal_id='{}'".format(self.meal_id))
+            cur.execute("""select meal_name from meals WHERE meal_id='{}'
+            """.format(self.meal_id))
             response = cur.fetchone()
         except Exception as e:
             print(e)
@@ -46,7 +48,8 @@ class OrderModel:
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("select user_name from users WHERE user_id='{}'".format(self.user_id))
+            cur.execute("""select user_name from users WHERE user_id='{}'
+            """.format(self.user_id))
             response = cur.fetchone()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
@@ -57,7 +60,8 @@ class OrderModel:
         con, response = self.db, None
         cur = con.cursor()
         try:
-            cur.execute("select price from meals WHERE meal_id='{}'".format(self.meal_id))
+            cur.execute(""" select price from meals WHERE meal_id='{}'
+            """.format(self.meal_id))
             response = cur.fetchone()[0]
 
         except psycopg2.DatabaseError as e:
@@ -119,7 +123,10 @@ class OrderModel:
         data, conn = None, self.db
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "insert into orders (meal_id, user_id, quantity, total, status) values('{}','{}','{}','{}','{}')".format(self.meal_id,  self.user_id,  self.quantity, self.total, self.status_default)
+            query = """ insert into orders (meal_id, user_id, quantity, total, status) 
+            values('{}','{}','{}','{}','{}')
+            """.format(self.meal_id,  self.user_id,  self.quantity, self.total,
+                       self.status_default)
             cursor.execute(query)
             conn.commit()
             data = cursor.fetchone()

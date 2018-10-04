@@ -19,12 +19,6 @@ dt2 = """ CREATE TABLE IF NOT EXISTS meals(
     created_at timestamp with time zone DEFAULT now()
 );"""
 
-dt3 = """ CREATE TABLE IF NOT EXISTS menus(
-    menu_id serial PRIMARY KEY NOT NULL,
-    menu_name VARCHAR(255) NOT NULL,
-    created_at timestamp with time zone DEFAULT now()
-);"""
-
 
 dt5 = """ CREATE TABLE IF NOT EXISTS orders(
     order_id serial PRIMARY KEY NOT NULL,
@@ -46,6 +40,7 @@ dt6 = """ CREATE TABLE IF NOT EXISTS blacklisted(
     token VARCHAR(255) NOT NULL,
     created_at timestamp with time zone DEFAULT now()
 ); """
+
 drop_dt1 = """ DROP TABLE IF EXISTS users CASCADE
 
 """
