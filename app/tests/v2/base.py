@@ -1,6 +1,6 @@
 import unittest
 from ... import create_app
-from ...api.v2.db.conn import create_db, drop_db
+from ...api.v2.db.conn import create_db, drop_db, user_test_data
 
 
 class BaseTest(unittest.TestCase):
@@ -13,15 +13,15 @@ class BaseTest(unittest.TestCase):
         # initialize the DB
         with self.app.app_context():
             create_db()
+            user_test_data()
 
         # test data
         self.user = [{"username": "njoki", "email": "njokiusers@gmail.com",
                      "password": "password"},
                      {"email": "kevine90", "password": "jsjsjjsjs"},
-                        {"email": 
-                     "testuser@gmail.com", "password": "passsss"}, {},  
-                     {'username': 'testuser', 'email': 'testuser@gmail.com', 
-                     'password': 'testme'}]
+                     {"email": "testuser@gmail.com", "password": "passsss"}, 
+                     {}, {'username': 'testuser', 'email': 
+                     'testuser@gmail.com', 'password': 'testme'}]
 
         self.test_user = {'username': 'testuser', 'email': 
                           'testuser@gmail.com', 'password': 'testme'}
