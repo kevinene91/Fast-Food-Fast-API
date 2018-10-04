@@ -34,16 +34,6 @@ def save_test_user():
             return {'message': '{}'.format(e)}
 
 
-def check_if_inserted_admin():
-    conn, response = create_conn(), None
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    query = """
-        select exists(select 1 from users where email=testuser@gmail.com)
-    """
-    cursor.execute(query)
-    conn.commit()
-
-
 def save_test_meal():
         conn = create_conn()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
