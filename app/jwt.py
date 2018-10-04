@@ -1,7 +1,7 @@
 from flask_jwt_extended import JWTManager
 jwt = JWTManager()
-
 from .api.v2.models.auth import UserModel
+
 
 @jwt.token_in_blacklist_loader
 def check_if_token_is_revoked(decrypted_token):
