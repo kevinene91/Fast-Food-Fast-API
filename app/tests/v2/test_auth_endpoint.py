@@ -18,13 +18,13 @@ class AuthEndpointTestCase(BaseTest):
     def test_register_with_invalid_email(self):
         response = self.client.post('api/v2/auth/signup', json=self.user[1])
         self.assertEqual(response.status_code, 400)
-    
+
     def test_user_login(self):
         response = self.client.post('api/v2/auth/login', json=self.user[0])
         self.assertEqual(response.status_code, 201)
-
+        
     def test_user_login_without_data(self):
-        response = self.client.post('api/v2/auth/login', json=self.user[1])
+        response = self.client.post('api/v2/auth/login', json=self.user[2])
         self.assertEqual(response.status_code, 400)
         self.assertIn('message', str(response.json))
 

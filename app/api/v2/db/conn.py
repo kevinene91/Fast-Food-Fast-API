@@ -23,7 +23,8 @@ def save_test_user():
         conn = create_conn()
         cursor = conn.cursor(cursor_factory=RealDictCursor)
         try:
-            query = "INSERT INTO users (user_name, email, password, role) values(%s, %s, %s, %s)"
+            query = """INSERT INTO users (user_name, email, password, role)
+             values(%s, %s, %s, %s)"""
             cursor.execute(query, ('testuser', 'testuser@gmail.com', password, 2))
             conn.commit()
             data = cursor.fetchone()
@@ -31,6 +32,16 @@ def save_test_user():
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
 
+
+# def check_if_inserted_admin():
+#     conn, response = create_conn(), None
+#     cursor = conn.cursor(cursor_factory=RealDictCursor)
+#     query = """
+#         select exists(select 1 from users where email=testuser@gmail.com)
+#     """
+#     cursor.execute(query)
+#     conn.commit()
+    
 
 def save_test_meal():
         conn = create_conn()
@@ -53,7 +64,7 @@ def save_test_order():
             cursor.execute(query, (1, 3))
             conn.commit()
             data = cursor.fetchone()
-            cursor.close()   
+            cursor.close()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
 
@@ -62,14 +73,14 @@ def save_test_order():
 def create_db(): 
     conn = create_conn()
     curr = conn.cursor()
-    conn.autocommit = True
+    conn.autocommit = False
     for query in queries:
         curr.execute(query)
+        conn.commit()
+    # if check_if_inserted_admin():
     save_test_user()
     save_test_meal()
     save_test_order()
-    curr.close()
-    conn.commit()
     return conn
 
 
@@ -80,7 +91,6 @@ def drop_db():
     try: 
         for query in to_drop:
             curr.execute(query)
-
         curr.close()
         conn.commit()
     except psycopg2.DatabaseError as e:

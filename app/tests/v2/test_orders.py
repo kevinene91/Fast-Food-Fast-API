@@ -16,7 +16,7 @@ class OrderTestCase(BaseTest):
         self.assertIn('message', str(response.json)) 
 
     def test_order_resource_get_specific(self):
-        response = self.response = self.client.get('api/v2/orders/1', 
+        response = self.response = self.client.get('api/v2/orders/3', 
                                                    headers=self.admin_headers)
         self.assertEqual(response.status_code, 200)
     
@@ -37,7 +37,7 @@ class OrderTestCase(BaseTest):
         self.assertIn('no order', str(response.json))
 
     def test_order_resource_delete(self):
-        response = self.client.delete('api/v2/orders/1', 
+        response = self.client.delete('api/v2/orders/3', 
                                       headers=self.admin_headers)
         self.assertEqual(response.status_code, 202)
 
@@ -54,7 +54,7 @@ class OrderTestCase(BaseTest):
         self.assertIn('No order', str(response.json))
 
     def test_order_resource_edit(self):
-        response = self.client.put('api/v2/orders/1', json=self.orders[3], 
+        response = self.client.put('api/v2/orders/3', json=self.orders[3], 
                                    headers=self.admin_headers)
         self.assertEqual(response.status_code, 201)
  
