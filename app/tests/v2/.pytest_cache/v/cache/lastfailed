@@ -25,8 +25,5 @@
   "test_menu_items.py::MenuTestCase::test_menuitem_resource_get_non_existent": true,
   "test_menu_items.py::MenuTestCase::test_menuitem_resource_get_specific": true,
   "test_orders.py::OrderTestCase::test_menuitem_resource_get_non_existent": true,
-  "test_orders.py::OrderTestCase::test_order_resource_add_existing_order": true,
-  "test_orders.py::OrderTestCase::test_order_resource_delete": true,
-  "test_orders.py::OrderTestCase::test_order_resource_edit": true,
-  "test_orders.py::OrderTestCase::test_order_resource_get_specific": true
+  "test_orders.py::OrderTestCase::test_order_resource_add_existing_order": true
 }
