@@ -56,11 +56,11 @@ Use Postman to the test the following endpoints
 
 |   # Endpoint     |  # Methods | # Description       |Auth Required |
 |   -----------    | ---------- | -----------------   | ------------ |
-|/api/v1/foods     |   GET      |  list all foods     |    No        |
+|/api/v2/menu      |   GET      |  list all foods     |    No        |
 |                  |            |                     |              | 
-|/api/v1/food/<id> |   GET      | get a specific food |    No        |
+|/api/v1/meals/<id> |   GET      | get a specific food|    No        |
 |                  |            |                     |              |
-|/api/v1/foods     |   POST     | add  a new food     |    Yes       |
+|/api/v1/menu     |   POST     | add  a new food      |    Yes       |
 |                  |            |                     |              |
 |/api/v1/foods/<id>|   PUT      |edit the food-item   |    Yes       |
 |                  |            |                     |              |
