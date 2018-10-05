@@ -5,9 +5,7 @@ FastFood API is a REST API that fetches that allows its user to order for food
 [![Coverage Status](https://coveralls.io/repos/github/kevinene91/Fast-Food-Fast-API/badge.svg?branch=develop )](https://coveralls.io/github/kevinene91/Fast-Food-Fast-API?branch=develop )
 ### Travis badge 
 [![Build Status](https://travis-ci.org/kevinene91/Fast-Food-Fast-API.svg?branch=develop)](https://travis-ci.org/kevinene91/Fast-Food-Fast-API)
-[![Maintainability](https://api.codeclimate.com/v1/badges/67c0f234dca2f9a3bd78/maintainability)](https://codeclimate.com/github/kevinene91/Fast-Food-Fast-API/maintainability)
 
-### Flask FAST FOOD FAST
 This is a Flask Restful API for an app that allows customers to place orders 
 
 ### Installation and Setup 
@@ -44,42 +42,40 @@ Use Postman to the test the following endpoints
 # API Auth
 
 
-|Endpoint          |   Method   | description         |
-|  ------------    | ---------- |  -----------------  |
-|/api/v1/register  |   POST     | add  a new user     |
-|                  |            |                     |
-|/api/v1/login     |   POST     |User Login token     |
-|                  |            |                     | 
-|/api/v1/logout    |   POST     | User logout         |
+|Endpoint           |   Method   | description         |
+|  ------------     | ---------- |  -----------------  |
+|/api/v2/auth/signup|   POST     | add  a new user     |
+|                   |            |                     |
+|/api/v2/auth/login |   POST     |User Login token     |
+|                   |            |                     | 
+|/api/v2/auth/logout|   POST     | User logout         |
 
 # API Endpoints
 
-|   # Endpoint     |  # Methods | # Description       |Auth Required |
-|   -----------    | ---------- | -----------------   | ------------ |
-|/api/v2/menu      |   GET      |  list all foods     |    No        |
-|                  |            |                     |              | 
-|/api/v1/meals/<id> |   GET      | get a specific food|    No        |
-|                  |            |                     |              |
-|/api/v1/menu     |   POST     | add  a new food      |    Yes       |
-|                  |            |                     |              |
-|/api/v1/foods/<id>|   PUT      |edit the food-item   |    Yes       |
-|                  |            |                     |              |
-|/api/v1/order/<id>|   GET      | get a specific order|    No        |
-|                  |            |                     |              |
-|/api/v1/orders    |   POST     | add  a new order    |    Yes       |
-|                  |            |                     |              |
-|/api/v1/order/<id>|   PUT      |edit the order-status|    Yes       |
-|                  |            |                     |              |
-|/api/v1/orders    |   GET      |  list all orders    |    No        |
-|                  |            |                     |              | 
-|                  |            |                     |              |
+|   # Endpoint       |  # Methods | # Description       |Auth Required  |
+|   -----------      | ---------- | -----------------   | ------------  |
+|/api/v2/menu        |   GET      |  list all foods     |    user       |
+|                    |            |                     |               | 
+|/api/v2/menu        |   POST     | add  a new food     |    admin      |
+|                    |            |                     |               |
+|/api/v2/meals/<id>  |   PUT      |edit the food-item   |    admin      |
+|                    |            |                     |               |
+|/api/v2/order/<id>  |   GET      | get a specific order|    admin      |
+|                    |            |                     |               |
+|/api/v2/users/orders|   POST     | add  a new order    |    user       |
+|                    |            |                     |               |
+|/api/v1/order/<id>  |   PUT      |edit the order-status|    admin      |
+|                    |            |                     |               |
+|/api/v2/users/orders|   GET      | list all orders     |    user       |
+|                    |            |                     |               | 
+|/api/v2/orders      |   GET      |   List all order    |   admin       |
 
 ### API DOCUMENTATION 
 
-[PostMan Docs](https://documenter.getpostman.com/view/2464061/RWaPt6BA)
+[Documentation](https://fastfoodfast1.docs.apiary.io/#reference/menu/meals-1)
 
 ### HEROKU LINK
-[HEROKU API](https://fast-food-place-api-heroku.herokuapp.com/)
+[HEROKU API](https://fast-food-place.herokuapp.com/)
 
 ### Author 
 
