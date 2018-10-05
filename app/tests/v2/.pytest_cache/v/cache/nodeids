@@ -1,0 +1,11 @@
+[
+  "test_meals.py::MealsTestCase::test_food_resource_add",
+  "test_meals.py::MealsTestCase::test_food_resource_add_empty",
+  "test_meals.py::MealsTestCase::test_food_resource_add_existing_food",
+  "test_meals.py::MealsTestCase::test_food_resource_delete",
+  "test_meals.py::MealsTestCase::test_food_resource_delete_non_existent",
+  "test_meals.py::MealsTestCase::test_food_resource_edit",
+  "test_meals.py::MealsTestCase::test_food_resource_edit_non_existent",
+  "test_meals.py::MealsTestCase::test_food_resource_get_non_existent",
+  "test_meals.py::MealsTestCase::test_food_resource_get_specific"
+]

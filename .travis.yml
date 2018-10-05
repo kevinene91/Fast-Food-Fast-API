@@ -1,0 +1,29 @@
+
+language: python 
+
+services: 
+  - postgresql
+
+
+python: 
+  - "3.6"
+
+before install:
+  - export APP_SETTINGS="testing"
+
+install: 
+  - pip install -r requirements.txt
+  - pip install coveralls 
+  - pip install nose
+
+before_script: 
+  - psql -c "CREATE DATABASE fastfoodfast;" -U postgres
+  - psql -c "CREATE DATABASE testfastfoodfast;" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to postgres ;" -U postgres
+
+
+script: 
+  - nosetests  --with-coverage --cover-package=.
+
+after_success:
+  - "coveralls"
