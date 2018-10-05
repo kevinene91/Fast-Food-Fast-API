@@ -9,8 +9,7 @@ from app.jwt import jwt
 class FoodResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('meal_name',
-                        help="white spaces not allowed",
-                        type=inputs.regex(r"(\s+)"),
+                        type=str,
                         required=True)
 
     parser.add_argument('price',

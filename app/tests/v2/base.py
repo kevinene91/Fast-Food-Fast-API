@@ -16,20 +16,21 @@ class BaseTest(unittest.TestCase):
             user_test_data()
 
         # test data
-        self.user = [{"username": "njoki", "email": "njokiusers@gmail.com",
-                     "password": "password"},
-                     {"email": "kevine90", "password": "jsjsjjsjs"},
-                     {"email": "testuser@gmail.com", "password": "passsss"}, 
+        self.user = [{"username": "njokichege", "email": "njokiusers@gmail.com",
+                     "password": "password", "role": 1},
+                     {"email": "kevinene@gmail.com", "password": "jsjsjjsjs", 
+                     "role": 1},{"email": "testuser@gmail.com", "password": 
+                     "passsss", "role": 1}, 
                      {}, {'username': 'testuser', 'email': 
-                     'testuser@gmail.com', 'password': 'testme'}]
+                     'testuser@gmail.com', 'password': 'testme', "role": 2}]
 
         self.test_user = {'username': 'testuser', 'email': 
-                          'testuser@gmail.com', 'password': 'testme'}
+                          'testuser@gmail.com', 'password': 'testmetoo', "role":2}
         self.meals = [
              {"meal_name": "mayai", "price": 100}, {},
              {"meal_name": "juice", "price": 80}]
         self.orders = [{"meal_id": 1, "quantity": 1}, {},
-                       {"quantity": 2, "meal_id": 2}, {'status': 3}]
+                       {"quantity": 2, "meal_id": 2}, {'status': "Complete"}]
         self.menu = [{"menu_name": "breakfast"}, {}, {"name": "supper"}]
         self.menuitem = [{"meal_id": 1, "menu_id": 1, "no_available": 1}, {}]
 

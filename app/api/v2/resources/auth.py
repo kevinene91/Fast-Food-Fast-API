@@ -21,7 +21,6 @@ class RegisterResource(Resource):
                         )
 
     parser.add_argument('password',
-                        help=" invalid password atleast 6 characters no spaces",
                         type=str,
                         required=True)
 

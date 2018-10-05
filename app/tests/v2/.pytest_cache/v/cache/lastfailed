@@ -1,7 +1,8 @@
 {
-  "test_auth_endpoint.py::AuthEndpointTestCase::test_login_invalid_email": true,
   "test_auth_endpoint.py::AuthEndpointTestCase::test_register_correct_user": true,
   "test_auth_endpoint.py::AuthEndpointTestCase::test_register_user": true,
+  "test_meals.py::MealsTestCase::test_food_resource_edit": true,
+  "test_meals.py::MealsTestCase::test_food_resource_edit_non_existent": true,
   "test_meals_items.py::MealsTestCase::test_food_resource_add": true,
   "test_meals_items.py::MealsTestCase::test_food_resource_add_empty": true,
   "test_meals_items.py::MealsTestCase::test_food_resource_add_existing_food": true,
