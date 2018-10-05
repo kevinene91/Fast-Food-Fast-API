@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, inputs
 from flask import jsonify
 import simplejson as json
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -57,7 +57,7 @@ class AdminOrdersListResource(Resource):
 class OrdersResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('status',
-                        type=int,
+                        type=str,
                         required=True)
        
     # get a specific order 
@@ -73,8 +73,9 @@ class OrdersResource(Resource):
     @admin_auth
     def put(self, id):
         parsed_data = OrdersResource.parser.parse_args()
-        expected = [2, 3]
+        expected = ['Processing', 'Canceled', 'Complete', 'New']
         message = "No order with id {}".format(id)
+        mess = "set status to either Processing, Canceled, Complete or New"
         if parsed_data['status'] in expected:
             data = {"order_id": id, 'status': parsed_data['status']}
             order = OrderModel(data).get_by_id()
@@ -85,7 +86,7 @@ class OrdersResource(Resource):
                 response.status_code = 201
                 return response
             return {"message": message}, 404
-        return {"message": "set to complete or decline"}
+        return {"message": mess}
         
     @admin_auth
     def delete(self, id):

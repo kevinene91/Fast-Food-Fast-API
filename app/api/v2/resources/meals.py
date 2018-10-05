@@ -1,5 +1,5 @@
 import psycopg2
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, inputs
 from flask import jsonify
 from ..models.meals import MealModel
 from ..middleware.middleware import norm_auth, admin_auth
@@ -9,11 +9,12 @@ from app.jwt import jwt
 class FoodResource(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('meal_name',
-                        type=str,
+                        help="white spaces not allowed",
+                        type=inputs.regex(r"(\s+)"),
                         required=True)
 
     parser.add_argument('price',
-                        type=str,
+                        type=int,
                         required=True)
 
     @norm_auth        

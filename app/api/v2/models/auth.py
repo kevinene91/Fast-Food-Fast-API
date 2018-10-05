@@ -13,7 +13,8 @@ class UserModel:
         self.username = data.get('username')
         self.email = data.get('email')
         self.token_blacked = data.get('token_blacked')
-        self.role = UserModel.customer
+        self.role = data.get('role')
+        self.table = data.get('table')
         self.user_id = data.get('user_id')
         self.db = create_conn()
         if not data.get('password'):
@@ -28,6 +29,17 @@ class UserModel:
         try:
             cur.execute("""select * from users WHERE email='{}'
             """.format(self.email))
+            response = cur.fetchall()
+        except psycopg2.DatabaseError as e:
+            return {'message': '{}'.format(e)}
+        con.close()
+        return response
+    
+    def get_all(self):
+        con, response = self.db, None
+        cur = con.cursor(cursor_factory=RealDictCursor)
+        try:
+            cur.execute("select * from {}".format(self.table))
             response = cur.fetchall()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
