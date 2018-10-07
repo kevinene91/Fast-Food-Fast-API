@@ -5,7 +5,8 @@ from flask_jwt_extended import JWTManager
 from .resources.orders import (CustomersOrdersListResource, 
                                OrdersResource, AdminOrdersListResource)
 from .resources.meals import (FoodListResource, FoodResource)
-from .resources.auth import (RegisterResource, LoginResource, LogoutResource)
+from .resources.auth import (RegisterResource, LoginResource, LogoutResource,
+                             UsersResource)
 
 apiv2 = Blueprint('apiv2', __name__)
 
@@ -14,6 +15,7 @@ api2 = Api(apiv2, prefix='/api/v2')
 
 # register v2 endpoints
 api2.add_resource(RegisterResource, '/auth/signup')
+api2.add_resource(UsersResource, '/auth/registered')
 api2.add_resource(LoginResource, '/auth/login')
 api2.add_resource(AdminOrdersListResource, '/orders')
 api2.add_resource(CustomersOrdersListResource, '/users/orders')

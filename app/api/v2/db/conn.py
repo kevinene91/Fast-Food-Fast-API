@@ -6,7 +6,7 @@ from flask_bcrypt import Bcrypt
 from psycopg2.extras import RealDictCursor
 from app.bcrypt import BCRYPT
 
-password = BCRYPT.generate_password_hash('testme').decode('utf-8')
+password = BCRYPT.generate_password_hash('testmetoo').decode('utf-8')
 
 
 # create a connection

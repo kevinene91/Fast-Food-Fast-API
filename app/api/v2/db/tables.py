@@ -25,7 +25,7 @@ dt5 = """ CREATE TABLE IF NOT EXISTS orders(
     meal_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL,
-    status INTEGER NOT NULL,
+    status VARCHAR(255) NOT NULL,
     total INTEGER NOT NUll,
     created_at timestamp with time zone DEFAULT now(),
     FOREIGN KEY (meal_id) REFERENCES meals (meal_id)

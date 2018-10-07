@@ -1,5 +1,5 @@
 import psycopg2
-from flask_restful import Resource, reqparse
+from flask_restful import Resource, reqparse, inputs
 from flask import jsonify
 from ..models.meals import MealModel
 from ..middleware.middleware import norm_auth, admin_auth
@@ -13,7 +13,7 @@ class FoodResource(Resource):
                         required=True)
 
     parser.add_argument('price',
-                        type=str,
+                        type=int,
                         required=True)
 
     @norm_auth        

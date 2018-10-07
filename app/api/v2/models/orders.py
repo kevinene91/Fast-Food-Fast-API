@@ -17,7 +17,7 @@ class OrderModel:
         self.total = data.get('total')
         self.status = data.get('status')
         self.table = data.get('table_name')
-        self.status_default = 1
+        self.status_default = "New"
         self.db = create_conn()
 
     def get_by_id(self):
