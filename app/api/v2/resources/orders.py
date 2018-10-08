@@ -63,7 +63,7 @@ class OrdersResource(Resource):
     # get a specific order 
     @admin_auth
     def get(self, id):
-        data = {"order_id": id}
+        data = {"id": "order_id", "table_name": "orders", "row": id}
         meal = OrderModel(data).get_by_id()
         message = "no order with {}".format(id)
         if meal:
@@ -89,7 +89,7 @@ class OrdersResource(Resource):
         
     @admin_auth
     def delete(self, id):
-        data = {"order_id": id}
+        data = {"id": "order_id", "table_name": "orders", "row": id}
         order = OrderModel(data).get_by_id()
         if order:
             try:
