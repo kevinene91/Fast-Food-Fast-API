@@ -14,8 +14,7 @@ class BaseModel:
         con, response = self.db, None
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("""select * from '{}' WHERE '{}'='{}'
-                """.format(self.table, self.id, self.row))
+            cur.execute("select * from {} WHERE {}='{}'".format(self.table, self.id, self.row))
             response = cur.fetchone()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}
@@ -37,19 +36,8 @@ class BaseModel:
         con = self.db
         cur = con.cursor(cursor_factory=RealDictCursor)
         try:
-            cur.execute("""delete from '{}' where '{}' ='{}'
-            """.format(self.table, self.id, self.role))
-            con.commit()
-        except psycopg2.DatabaseError as e:
-            return {'message': '{}'.format(e)}
-        con.close()
-
-    def update(self):
-        con, response = self.db, None
-        cur = con.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute("""UPDATE '{}' SET '{}'='{}', {}='{}' WHERE '{}'='{}'
-            """.format(self.table, self.row, self.row, self.row, self.id))
+            cur.execute("""delete from {} where {} ='{}'
+            """.format(self.table, self.id, self.row))
             con.commit()
         except psycopg2.DatabaseError as e:
             return {'message': '{}'.format(e)}

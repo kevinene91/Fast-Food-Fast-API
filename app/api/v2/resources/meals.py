@@ -18,7 +18,7 @@ class FoodResource(Resource):
 
     @norm_auth        
     def get(self, id):
-        data = {"meal_id": id}
+        data = {"id": "meal_id", "table_name": "meals", "row": id}
         meal = MealModel(data).get_by_id()
         message = "no meal with id {}".format(id)
         if meal:
@@ -42,7 +42,7 @@ class FoodResource(Resource):
 
     @admin_auth
     def delete(self, id):
-        data = {"meal_id": id}
+        data = {"id": "meal_id", "table_name": "meals", "row": id}
         menu = MealModel(data).get_by_id()
         if menu:
             try:
