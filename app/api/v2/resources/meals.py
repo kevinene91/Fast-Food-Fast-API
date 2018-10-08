@@ -28,7 +28,7 @@ class FoodResource(Resource):
     @admin_auth
     def put(self, id):
         parsed_data = FoodResource.parser.parse_args()
-        data = {"meal_id": id}
+        data = {"id": "meal_id", "table_name": "meals", "row": id}
         data_to_update = {"meal_name": parsed_data['meal_name'],
                           "price": parsed_data['price'], "meal_id": id}
         menu = MealModel(data).get_by_id()

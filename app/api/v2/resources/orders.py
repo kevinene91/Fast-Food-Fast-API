@@ -77,7 +77,8 @@ class OrdersResource(Resource):
         message = "No order with id {}".format(id)
         mess = "set status to either Processing, Canceled, Complete or New"
         if parsed_data['status'] in expected:
-            data = {"order_id": id, 'status': parsed_data['status']}
+            data = {"id": "order_id", "table_name": "orders", "row": id,
+            "order_id": id, 'status': parsed_data['status']}
             order = OrderModel(data).get_by_id()
             if order:
                 order = OrderModel(data).update_status()
