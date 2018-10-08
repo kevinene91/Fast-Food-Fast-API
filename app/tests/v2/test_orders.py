@@ -31,13 +31,13 @@ class OrderTestCase(BaseTest):
         self.assertEqual(response.status_code, 200)
 
     def test_order_resource_get_non_existent(self):
-        response = self.response = self.client.get('api/v2/orders/56', 
+        response = self.response = self.client.get('api/v2/orders/456', 
                                                    headers=self.admin_headers)
         self.assertEqual(response.status_code, 404)
         self.assertIn('no order', str(response.json))
 
     def test_order_resource_edit_non_existent(self):
-        response = self.client.put('api/v2/orders/56', json=self.orders[3], 
+        response = self.client.put('api/v2/orders/456', json=self.orders[3], 
                                    headers=self.admin_headers)
         self.assertEqual(response.status_code, 404)
         self.assertIn('No order', str(response.json))

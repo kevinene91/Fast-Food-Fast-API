@@ -63,7 +63,7 @@ class OrdersResource(Resource):
     # get a specific order 
     @admin_auth
     def get(self, id):
-        data = {"order_id": id}
+        data = {"id": "order_id", "table_name": "orders", "row": id}
         meal = OrderModel(data).get_by_id()
         message = "no order with {}".format(id)
         if meal:
@@ -77,7 +77,8 @@ class OrdersResource(Resource):
         message = "No order with id {}".format(id)
         mess = "set status to either Processing, Canceled, Complete or New"
         if parsed_data['status'] in expected:
-            data = {"order_id": id, 'status': parsed_data['status']}
+            data = {"id": "order_id", "table_name": "orders", "row": id,
+            "order_id": id, 'status': parsed_data['status']}
             order = OrderModel(data).get_by_id()
             if order:
                 order = OrderModel(data).update_status()
@@ -90,7 +91,7 @@ class OrdersResource(Resource):
         
     @admin_auth
     def delete(self, id):
-        data = {"order_id": id}
+        data = {"id": "order_id", "table_name": "orders", "row": id}
         order = OrderModel(data).get_by_id()
         if order:
             try:
